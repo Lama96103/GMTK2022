@@ -48,7 +48,6 @@ public abstract class DiceController : Spatial
         return;
     }
 
-
     public void RollDice(Vector3 direction)
     {
         if(isRolling) return;
@@ -66,4 +65,6 @@ public abstract class DiceController : Spatial
         progress = 0;
         isRolling = true;
     }
+
+    public abstract bool ExecuteTurn();
 }

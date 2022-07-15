@@ -25,13 +25,10 @@ public class EnemyDiceController : DiceController
             path.RemoveAt(0);
         }
     }
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-    public override void _Process(float delta)
+
+    public override bool ExecuteTurn()
     {
-        base._Process(delta);
-        if(Input.IsActionJustPressed("key_endRound"))
-        {
-            Move();
-        }
+        Move();
+        return true;
     }
 }
