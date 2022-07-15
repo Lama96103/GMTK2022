@@ -32,3 +32,7 @@ transform = Transform( 1, 0, 0, 0, 0.713336, 0.700822, 0, -0.700822, 0.713336, 0
 
 [node name="Level_001" parent="." instance=ExtResource( 4 )]
 visible = false
+
+[node name="Dice" parent="." instance=ExtResource( 1 )]
+path = [ Vector3( 1, 0, 0 ), Vector3( 0, 0, 1 ), Vector3( 0, 0, 1 ), Vector3( -1, 0, 0 ) ]
+
