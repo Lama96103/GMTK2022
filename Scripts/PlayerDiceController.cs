@@ -14,8 +14,24 @@ public class PlayerDiceController : DiceController
     }
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
+    public override void _Process(float delta)
+    {
+        base._Process(delta);
+         if(Input.IsActionJustPressed("key_forward"))
+        {
+            RollDice(Vector3.Forward);
+        }
+        if(Input.IsActionJustPressed("key_backward"))
+        {
+            RollDice(Vector3.Back);
+        }
+        if(Input.IsActionJustPressed("key_right"))
+        {
+            RollDice(Vector3.Right);
+        }
+        if(Input.IsActionJustPressed("key_left"))
+        {
+            RollDice(Vector3.Left);
+        }
+    }
 }

@@ -8,3 +8,4 @@
 transform = Transform( 1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 5.72205e-06, 5.39315, 12.0254 )
 
 [node name="Dice" parent="." instance=ExtResource( 1 )]
+path = [ Vector3( 1, 0, 0 ), Vector3( 0, 0, 1 ), Vector3( 0, 0, 1 ), Vector3( -1, 0, 0 ) ]
