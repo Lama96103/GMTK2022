@@ -4,12 +4,10 @@ using Godot.Collections;
 
 public class TurnController : Node
 {
-
     private int currentDice = 0;
     private Array<DiceController> executionOrder;
-    // Declare member variables here. Examples:
-    // private int a = 2;
-    // private string b = "text";
+
+    private LevelController levelController;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -24,10 +22,16 @@ public class TurnController : Node
         {
             FindDice();
         }
+        
         if(executionOrder[currentDice].ExecuteTurn())
         {
+            Vector3 diceLocation = executionOrder[currentDice].Translation;
+            levelController.UpdateDiceLocation(executionOrder[currentDice], diceLocation);
+
             currentDice = (currentDice + 1) % executionOrder.Count;
         }
+
+        
     }
 
     private void FindDice()
@@ -39,6 +43,9 @@ public class TurnController : Node
         {
             executionOrder.Add(dice);
         }
+
+        levelController = GetChild<LevelController>(3);
+        
     }
 
 }

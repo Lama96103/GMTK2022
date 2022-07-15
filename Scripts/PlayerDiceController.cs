@@ -12,8 +12,14 @@ public class PlayerDiceController : DiceController
     {
         
     }
-
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
+    public override void _Process(float delta)
+    {
+        base._Process(delta);
+        if(Input.IsActionJustPressed("ui_accept"))
+        {
+            this.GetParent().GetChild<LevelController>(3).AddEffect(new FireEffect(), this.Translation);
+        }
+    }
 
     public override bool ExecuteTurn()
     {

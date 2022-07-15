@@ -41,11 +41,7 @@ public abstract class DiceController : Spatial
                 this.Translation = endPosition;
                 this.GetChild<Spatial>(0).RotationDegrees = endRotation;
             }
-
-            
         }
-
-        return;
     }
 
     public void RollDice(Vector3 direction)
