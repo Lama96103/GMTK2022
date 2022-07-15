@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class Test : Node
+public class EnemyDiceController : DiceController
 {
     // Declare member variables here. Examples:
     // private int a = 2;
