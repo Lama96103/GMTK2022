@@ -25,9 +25,6 @@ public class TurnController : Node
         
         if(executionOrder[currentDice].ExecuteTurn())
         {
-            Vector3 diceLocation = executionOrder[currentDice].Translation;
-            levelController.UpdateDiceLocation(executionOrder[currentDice], diceLocation);
-
             currentDice = (currentDice + 1) % executionOrder.Count;
         }
 
@@ -46,6 +43,11 @@ public class TurnController : Node
 
         levelController = GetChild<LevelController>(3);
         
+
+        foreach(DiceController dice in executionOrder)
+        {
+            dice.CurrentLevel = levelController;
+        }
     }
 
 }

@@ -10,21 +10,27 @@ public class LevelController : Spatial
 
     private Dictionary<Vector3, GridState> gridStatus = new Dictionary<Vector3, GridState>();
 
+    [Export] private Mesh GridMesh;
+
     public override void _Ready()
     {
-        
+        DrawGrid();
     }
 
     public void AddEffect(IGridEffect effect, Vector3 position)
     {
-        GD.Print("Adding effect add");
+        GD.Print("Adding effect add ", position);
         foreach(Vector3 loc in effect.Locations)
         {
             Vector3 affectedPos = position + loc;
             if(!gridStatus.ContainsKey(affectedPos)) gridStatus.Add(affectedPos, new GridState());
 
+
             gridStatus[affectedPos].Effect = effect;
             gridStatus[affectedPos].EffectDuration = effect.Duration;
+
+            if(gridStatus[affectedPos].Dice != null)
+                gridStatus[affectedPos].Effect.ApplyEffect(gridStatus[affectedPos].Dice);
         }
     }
 
@@ -64,6 +70,7 @@ public class LevelController : Spatial
 
     private void DrawGrid()
     {
+        /*
         DebugControl debugControl = null;
         if(Engine.EditorHint)
         {
@@ -81,17 +88,57 @@ public class LevelController : Spatial
         {
             debugControl = DebugControl.Instance;
         }
+        */
+
+        MultiMeshInstance multiMeshInstance = GetChild<MultiMeshInstance>(0);
+
+        MultiMesh mesh = new MultiMesh();
+        mesh.Mesh = GridMesh;
+        multiMeshInstance.Multimesh = mesh;
+
+        mesh.TransformFormat = MultiMesh.TransformFormatEnum.Transform3d;
+        mesh.ColorFormat = MultiMesh.ColorFormatEnum.Color8bit;
+        mesh.CustomDataFormat = MultiMesh.CustomDataFormatEnum.None;
+
+        mesh.InstanceCount =  1000;
+        //mesh.VisibleInstanceCount = field.BG_MaxAsteroidCount;
 
 
-        float y = -0.49f;
+        float y = -0.5f;
+        int index = 0;
         for(float x = -SizeX; x <= SizeX; x++)
         {
-            debugControl.DebugLine(new Vector3(x, y, -SizeZ), new Vector3(x, y, SizeZ), new Color(1,1,1, 0.5f));
-        }
+            for(float z = -SizeZ; z <= SizeZ; z++)
+            {
+                //float colorVal = random.RandfRange(0.3f, 0.8f);
+                Color color = new Color(1, 1, 1);
 
-        for(float z = -SizeZ; z <= SizeZ; z++)
+
+                Transform transform = Transform.Identity;
+                //transform = transform.Rotated(new Vector3(0,1,0), random.Randf());
+                transform.origin = new Vector3(x, y, z);
+
+                mesh.SetInstanceTransform(index, transform);
+                mesh.SetInstanceColor(index, color);
+                index++;
+
+                transform = Transform.Identity;
+                transform = transform.Rotated(new Vector3(0,1,0), Mathf.Deg2Rad(90));
+                transform.origin = new Vector3(x, y, z);
+
+                mesh.SetInstanceTransform(index, transform);
+                mesh.SetInstanceColor(index, color);
+                index++;
+            }
+        }
+        mesh.VisibleInstanceCount = index;
+
+        foreach(var item in gridStatus)
         {
-            debugControl.DebugLine(new Vector3(-SizeX, y, z), new Vector3(SizeX, y, z), new Color(1,1,1, 0.5f));
+            if(item.Value.Effect != null)
+            {
+                //debugControl.DebugBox(item.Key, 0.5f, new Color(1,0,0));
+            }
         }
     }
 }

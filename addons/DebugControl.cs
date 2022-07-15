@@ -74,8 +74,8 @@ public class DebugControl : Control
 	
 	public void DebugLine(Vector3 start, Vector3 end, Color color, bool elevate = false)
 	{	
-		if(camera.IsPositionBehind(start) || camera.IsPositionBehind(end)) return;
 		if(camera == null) return;
+		if(camera.IsPositionBehind(start) || camera.IsPositionBehind(end)) return;
 		if(currentDebugElement < debugElements.Length)
 		{
 			if(elevate) 
@@ -216,7 +216,11 @@ public class DebugControl : Control
 		if(camera == null)
 		{
 			camera = GetCamera();
-			if(camera == null) return;
+			if(camera == null) 
+			{
+				currentDebugElement = 0;
+				return;
+			}
 		}
 		
 		
