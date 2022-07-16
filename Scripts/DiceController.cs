@@ -15,6 +15,9 @@ public abstract class DiceController : Spatial
 
     private bool isRolling = false;
 
+    public LevelController CurrentLevel = null;
+
+
     public override void _Ready()
     {
         //RollDice(Vector3.Right);
@@ -40,12 +43,10 @@ public abstract class DiceController : Spatial
                 isRolling = false;
                 this.Translation = endPosition;
                 this.GetChild<Spatial>(0).RotationDegrees = endRotation;
+
+                CurrentLevel.UpdateDiceLocation(this, this.Translation);
             }
-
-            
         }
-
-        return;
     }
 
     public void RollDice(Vector3 direction)

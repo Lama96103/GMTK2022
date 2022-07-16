@@ -4,12 +4,10 @@ using Godot.Collections;
 
 public class TurnController : Node
 {
-
     private int currentDice = 0;
     private Array<DiceController> executionOrder;
-    // Declare member variables here. Examples:
-    // private int a = 2;
-    // private string b = "text";
+
+    private LevelController levelController;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -17,17 +15,20 @@ public class TurnController : Node
         
     }
 
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
+
     public override void _Process(float delta)
     {
         if(executionOrder == null)
         {
             FindDice();
         }
+        
         if(executionOrder[currentDice].ExecuteTurn())
         {
             currentDice = (currentDice + 1) % executionOrder.Count;
         }
+
+        
     }
 
     private void FindDice()
@@ -38,6 +39,14 @@ public class TurnController : Node
         foreach(DiceController dice in this.GetTree().GetNodesInGroup("EnemyDice"))
         {
             executionOrder.Add(dice);
+        }
+
+        levelController = GetChild<LevelController>(3);
+        
+
+        foreach(DiceController dice in executionOrder)
+        {
+            dice.CurrentLevel = levelController;
         }
     }
 

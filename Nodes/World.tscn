@@ -32,6 +32,8 @@ script = ExtResource( 3 )
 
 [node name="Camera" type="Camera" parent="CameraController"]
 transform = Transform( 1, 0, 0, 0, 0.713336, 0.700822, 0, -0.700822, 0.713336, 0, 9.80722, 11.1934 )
+projection = 1
+size = 7.613
 
 [node name="Level_001" parent="." instance=ExtResource( 2 )]
 
