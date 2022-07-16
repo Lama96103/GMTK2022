@@ -11,12 +11,10 @@ public interface IGridEffect
     
 }
 
-public class FireEffect : IGridEffect
+public class FireEffect : Godot.Object, IGridEffect
 {
     public int Duration => 1;
-
     public Vector3[] Locations => new Vector3[]{Vector3.Right, Vector3.Left, Vector3.Forward, Vector3.Back};
-
     public string ParticleEffectPath => "res://Particles/StylizedFire/FireEffect.tscn";
 
     public void ApplyEffect(DiceController dice)
