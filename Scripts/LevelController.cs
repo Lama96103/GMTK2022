@@ -136,7 +136,7 @@ public class LevelController : Spatial
         mesh.CustomDataFormat = MultiMesh.CustomDataFormatEnum.None;
 
         mesh.InstanceCount =  1000;
-        float y = -0.5f;
+        float y = 0;
         int index = 0;
         for(float x = -SizeX; x <= SizeX; x++)
         {
