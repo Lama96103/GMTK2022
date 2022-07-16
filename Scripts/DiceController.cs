@@ -13,7 +13,7 @@ public abstract class DiceController : Spatial
     private Spatial dice;
     private RayCast rayCast;
 
-    protected bool IsRolling = false;
+    public bool IsRolling = false;
 
     public override void _Ready()
     {

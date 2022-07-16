@@ -34,6 +34,8 @@ material/0 = SubResource( 2 )
 
 [node name="Player" parent="." groups=["Player"] instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 5 )
+EffectLocation = [ Vector3( 0, 1, 0 ) ]
+EffectType = [ "FireEffect" ]
 
 [node name="Enemy" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0 )

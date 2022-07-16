@@ -14,7 +14,7 @@ public interface IGridEffect
 
 public class FireEffect : IGridEffect
 {
-    public int Duration => 1;
+    public int Duration => 2;
     public Vector3[] Locations => new Vector3[]{Vector3.Right, Vector3.Left, Vector3.Forward, Vector3.Back};
     public string ParticleEffectPath => "res://Particles/StylizedFire/FireEffect.tscn";
 
@@ -22,6 +22,13 @@ public class FireEffect : IGridEffect
 
     public void ApplyEffect(DiceController dice)
     {
-        GD.Print("Dice is destroyed ", dice);
+        GD.Print(dice);
+        if(dice.IsInGroup("EnemyDice"))
+        {
+            dice.QueueFree();
+        }else
+        {
+            GD.Print("Game Over");
+        }
     }
 }

@@ -29,7 +29,6 @@ public class EnemyDiceController : DiceController
             {
                 MeshInstance stepMarker = (MeshInstance) this.GetTree().GetNodesInGroup("PathMarker")[selectedPathMarker];
                 stepMarker.Translate(step);
-                GD.Print("newCords", step);
                 selectedPathMarker++;
             }else
             {

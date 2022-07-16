@@ -16,6 +16,8 @@ public class LevelController : Spatial
     private int currentDice = 0;
     private Array<DiceController> executionOrder;
 
+    private bool startedRolling = false;
+
     public override void _Ready()
     {
         DrawGrid();
@@ -29,15 +31,25 @@ public class LevelController : Spatial
             FindDice();
         }
         
-        if(executionOrder[currentDice].ExecuteTurn())
+        if(!startedRolling)
         {
-            currentDice = (currentDice + 1) % executionOrder.Count;
-
-            if(currentDice == 0)
+            if(executionOrder[currentDice].ExecuteTurn())
             {
-                OnRoundStart();
+                startedRolling = true;
             }
-        } 
+        }else
+        {
+            if(!executionOrder[currentDice].IsRolling)
+            {
+                currentDice = (currentDice + 1) % executionOrder.Count;
+
+                if(currentDice == 0)
+                {
+                    OnRoundStart();
+                }
+                startedRolling = false;
+            }
+        }
     }
 
     private void FindDice()
