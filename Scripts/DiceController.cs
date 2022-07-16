@@ -34,6 +34,7 @@ public abstract class DiceController : Spatial
         for(int i = 0; i < childCount; i++)
             mesh.RemoveChild(mesh.GetChild(0));
 
+        int index = 0;;
         foreach(Vector3 pos in EffectLocation)
         {
             MeshInstance meshInstance = new MeshInstance();
@@ -41,8 +42,6 @@ public abstract class DiceController : Spatial
             meshInstance.Mesh = planeMesh;
             planeMesh.Size = new Vector2(0.8f, 0.8f);
             meshInstance.Translate(pos * 0.51f);
-
-          
 
             Vector3 rotation = Vector3.Up.Cross(pos);
             if(rotation.Length() > 0)
@@ -56,9 +55,13 @@ public abstract class DiceController : Spatial
                     meshInstance.RotateX(Mathf.Pi);
                 }
             }
+            
+            string effectType = EffectType[index];
+            IGridEffect effect = GetEffect(effectType, Vector3.Zero);
+            
             SpatialMaterial material = new SpatialMaterial();
             material.AlbedoColor = new Color(1,0,0);
-            meshInstance.MaterialOverride = material;
+            meshInstance.MaterialOverride = ResourceLoader.Load<Material>(effect.DiceMaterialPath);
 
             rayCast = new RayCast();
             rayCast.CollideWithAreas = true;
@@ -69,7 +72,7 @@ public abstract class DiceController : Spatial
 
             mesh.AddChild(meshInstance);
 
-            
+            index++;
         }
 
         
@@ -99,11 +102,7 @@ public abstract class DiceController : Spatial
             {
                 GD.Print("Fired " , this.Name);
                 int index = EffectLocation.IndexOf(item.Key);
-                IGridEffect effect = new FireEffect();
-                if(EffectType[index] == "Ice")
-                {
-                    effect = new IceEffect(currentDirection);
-                }
+                IGridEffect effect = GetEffect(EffectType[index], currentDirection);
                 CurrentLevel.AddEffect(effect, dice.GlobalTransform.origin, this);
                 PlaySound(effect);
             }
@@ -114,6 +113,12 @@ public abstract class DiceController : Spatial
     }
 
     protected virtual void AfterDiceRolled(){}
+
+    private IGridEffect GetEffect(string effectName, Vector3 dir )
+    {
+        if(effectName.Contains("Ice")) return new IceEffect(dir);
+        else return new FireEffect();
+    }
 
     private void PlaySound(IGridEffect effect)
     {
