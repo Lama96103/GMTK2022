@@ -21,7 +21,7 @@ public class EnemyDiceController : DiceController
         {
             RollDice(path[0]);
             path.RemoveAt(0);
-            ShowNextSteps();
+            
         }
     }
 
@@ -33,12 +33,19 @@ public class EnemyDiceController : DiceController
             if(node.GetType().Equals(typeof(MeshInstance)))
             {
                 MeshInstance stepMarker = (MeshInstance) node;
+                stepMarker.Translation = this.GetChild<Spatial>(0).Translation;
                 for(int i = 0; i <= pathMarkerCount; i++)
                 {
-                    stepMarker.Translation = this.GetChild<Spatial>(0).Translation + path[i];
+                     stepMarker.Translation += path[i];
                 }
+                pathMarkerCount++;
             }
         }
+    }
+
+    protected override void AfterDiceRolled()
+    {
+        ShowNextSteps();
     }
 
     public override bool ExecuteTurn()
