@@ -9,6 +9,12 @@ public class EnemyDiceController : DiceController
 
     [Export] private Array<Vector3> path = new Array<Vector3>();
 
+    public override void _Ready()
+    {
+        base._Ready();
+        ShowNextSteps();
+    }
+
     public void Move()
     {
         if(path.Count() > 0)
@@ -21,21 +27,16 @@ public class EnemyDiceController : DiceController
 
     private void ShowNextSteps()
     {
-        int pathMarkerCount = this.GetTree().GetNodesInGroup("PathMarker").Count;
-        int selectedPathMarker = 0;
-        foreach(Vector3 step in path)
+        int pathMarkerCount = 0;
+        foreach(Node node in this.GetChildren())
         {
-            if(selectedPathMarker < pathMarkerCount)
+            if(node.GetType().Equals(typeof(MeshInstance)))
             {
-                MeshInstance stepMarker = (MeshInstance) this.GetTree().GetNodesInGroup("PathMarker")[selectedPathMarker];
-                if(stepMarker.GetParent().Equals(this))
+                MeshInstance stepMarker = (MeshInstance) node;
+                for(int i = 0; i <= pathMarkerCount; i++)
                 {
-                    stepMarker.Translation = this.GetChild<Spatial>(0).Translation + step;
-                    selectedPathMarker++;
+                    stepMarker.Translation = this.GetChild<Spatial>(0).Translation + path[i];
                 }
-            }else
-            {
-                break;
             }
         }
     }
