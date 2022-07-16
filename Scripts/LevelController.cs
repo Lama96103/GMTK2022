@@ -32,6 +32,11 @@ public class LevelController : Spatial
         if(executionOrder[currentDice].ExecuteTurn())
         {
             currentDice = (currentDice + 1) % executionOrder.Count;
+
+            if(currentDice == 0)
+            {
+                OnRoundStart();
+            }
         } 
     }
 

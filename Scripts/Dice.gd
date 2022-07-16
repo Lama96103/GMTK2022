@@ -6,6 +6,7 @@ onready var pivot = $Pivot
 onready var mesh = $Pivot/MeshInstance
 onready var tween = $Tween
 
+signal DiceRolled
 
 func roll(dir):
 	# Do nothing if we're currently rolling.
@@ -30,6 +31,8 @@ func roll(dir):
 	pivot.transform = Transform.IDENTITY
 	mesh.transform.origin = Vector3(0, 0.5, 0)
 	mesh.global_transform.basis = b  ## Apply the rotation
+	
+	emit_signal("DiceRolled")
 	
 
 
