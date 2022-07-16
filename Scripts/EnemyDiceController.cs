@@ -28,8 +28,11 @@ public class EnemyDiceController : DiceController
             if(selectedPathMarker < pathMarkerCount)
             {
                 MeshInstance stepMarker = (MeshInstance) this.GetTree().GetNodesInGroup("PathMarker")[selectedPathMarker];
-                stepMarker.Translate(step);
-                selectedPathMarker++;
+                if(stepMarker.GetParent().Equals(this))
+                {
+                    stepMarker.Translation = this.GetChild<Spatial>(0).Translation + step;
+                    selectedPathMarker++;
+                }
             }else
             {
                 break;

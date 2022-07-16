@@ -28,7 +28,7 @@ public class FireEffect : IGridEffect
             dice.QueueFree();
         }else
         {
-            GD.Print("Game Over");
+            WorldController.Instance.LoadDeathMenu();
         }
     }
 }
