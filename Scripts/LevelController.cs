@@ -133,7 +133,10 @@ public class LevelController : Spatial
         bool foundLocation = false;
         foreach(var item in gridStatus)
         {
-            if(item.Value.Dice == dice) item.Value.Dice = null;
+            if(item.Value.Dice == dice)
+            {
+                item.Value.Dice = null;
+            } 
 
             if(item.Key == position)
             {
