@@ -10,4 +10,5 @@ material = SubResource( 1 )
 size = Vector2( 1, 1 )
 
 [node name="Spatial" type="MeshInstance"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0 )
 mesh = SubResource( 2 )

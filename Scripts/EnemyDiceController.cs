@@ -25,6 +25,11 @@ public class EnemyDiceController : DiceController
         }
     }
 
+    public void setFrozen()
+    {
+        path.Insert(0, new Vector3(0, 0, 0));
+    }
+
     private void ShowNextSteps()
     {
         int pathMarkerCount = 0;

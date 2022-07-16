@@ -38,19 +38,7 @@ EffectLocation = [ Vector3( 0, 1, 0 ) ]
 EffectType = [ "Ice" ]
 
 [node name="Enemy" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0 )
-EffectLocation = [ Vector3( 0, -1, 0 ) ]
-EffectType = [ "FireEffect" ]
-path = [ Vector3( -1, 0, 0 ), Vector3( -1, 0, 0 ), Vector3( -1, 0, 0 ), Vector3( -1, 0, 0 ), Vector3( -1, 0, 0 ) ]
-
-[node name="Enemy2" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -1 )
-EffectLocation = [ Vector3( 0, -1, 0 ) ]
-EffectType = [ "FireEffect" ]
-path = [ Vector3( -1, 0, 0 ), Vector3( -1, 0, 0 ), Vector3( -1, 0, 0 ), Vector3( -1, 0, 0 ), Vector3( -1, 0, 0 ) ]
-
-[node name="Enemy3" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -2 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 2 )
 EffectLocation = [ Vector3( 0, -1, 0 ) ]
 EffectType = [ "FireEffect" ]
 path = [ Vector3( -1, 0, 0 ), Vector3( -1, 0, 0 ), Vector3( -1, 0, 0 ), Vector3( -1, 0, 0 ), Vector3( -1, 0, 0 ) ]

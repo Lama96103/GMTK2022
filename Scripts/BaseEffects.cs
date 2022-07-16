@@ -42,7 +42,7 @@ public class IceEffect : IGridEffect
 
     public string ParticleEffectPath => "res://Particles/IceEffect.tscn";
 
-    public string ParticleSoundPath => "res://Sounds and Music/Sounds/mixkit-fire-swoosh-burning-2s.wav"; //CHANGE
+    public string ParticleSoundPath => "res://Sounds and Music/Sounds/Freeze.wav";
 
     public Vector3[] Locations => new Vector3[]{effectDirection, effectDirection * 2, effectDirection * 3};
 
@@ -53,6 +53,10 @@ public class IceEffect : IGridEffect
 
     public void ApplyEffect(DiceController dice)
     {
-        
+        if(dice.IsInGroup("EnemyDice"))
+        {
+            EnemyDiceController enemyDice = (EnemyDiceController) dice;
+            enemyDice.setFrozen();
+        }
     }
 }
