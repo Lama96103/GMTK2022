@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using Godot.Collections;
 using System.Collections.Generic;
 
 [Tool]
@@ -8,13 +9,47 @@ public class LevelController : Spatial
     [Export] private float SizeX = 10.5f;
     [Export] private float SizeZ = 10.5f;
 
-    private Dictionary<Vector3, GridState> gridStatus = new Dictionary<Vector3, GridState>();
+    private System.Collections.Generic.Dictionary<Vector3, GridState> gridStatus = new System.Collections.Generic.Dictionary<Vector3, GridState>();
 
     [Export] private Mesh GridMesh;
+
+    private int currentDice = 0;
+    private Array<DiceController> executionOrder;
 
     public override void _Ready()
     {
         DrawGrid();
+    }
+
+    public override void _Process(float delta)
+    {
+        if(Engine.EditorHint) return;
+        if(executionOrder == null)
+        {
+            FindDice();
+        }
+        
+        if(executionOrder[currentDice].ExecuteTurn())
+        {
+            currentDice = (currentDice + 1) % executionOrder.Count;
+        } 
+    }
+
+    private void FindDice()
+    {
+        currentDice = 0;
+        executionOrder = new Array<DiceController>();
+        DiceController playerDice = (DiceController) this.GetTree().GetNodesInGroup("Player")[0];
+        executionOrder.Add(playerDice);
+        foreach(DiceController dice in this.GetTree().GetNodesInGroup("EnemyDice"))
+        {
+            executionOrder.Add(dice);
+        } 
+
+        foreach(DiceController dice in executionOrder)
+        {
+            dice.CurrentLevel = this;
+        }
     }
 
     public void AddEffect(IGridEffect effect, Vector3 position)
