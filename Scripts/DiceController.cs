@@ -78,7 +78,7 @@ public abstract class DiceController : Spatial
     {
         IsRolling = true;
         dice.Call("roll", direction);
-        PlaySound();
+        PlaySound(null);
     }
 
     private void OnDiceRolled()
@@ -91,19 +91,21 @@ public abstract class DiceController : Spatial
             {
                 GD.Print("Fired " , this.Name);
                 int index = EffectLocation.IndexOf(item.Key);
-                CurrentLevel.AddEffect(new FireEffect(), dice.GlobalTransform.origin);
+                FireEffect effect = new FireEffect();
+                CurrentLevel.AddEffect(effect, dice.GlobalTransform.origin);
+                PlaySound(effect);
             }
         }
 
         CurrentLevel.UpdateDiceLocation(this, this.GlobalTransform.origin);
     }
 
-    private void PlaySound()
+    private void PlaySound(IGridEffect effect)
     {
         String path = "res://Sounds and Music/Sounds/";
         int lastIndex = CurrentLevel.GetParent().GetChildCount();
         AudioStreamPlayer audioPlayer = CurrentLevel.GetParent().GetChild<AudioStreamPlayer>(lastIndex - 1);
-        if(ActiveEffect() == null)
+        if(effect == null)
         {
             String[] diceSounds = new String[4];
             for(int i = 0; i < diceSounds.Length; i++)
@@ -115,10 +117,9 @@ public abstract class DiceController : Spatial
             AudioStreamSample audioStream = ResourceLoader.Load<AudioStreamSample>(path + diceSounds[selection]);
             audioPlayer.Stream = audioStream;
             audioPlayer.Play();
-        }
-        if(ActiveEffect() == "FireEffect")
-        {           
-            AudioStreamSample audioStream = ResourceLoader.Load<AudioStreamSample>(path + "mixkit-fire-swoosh-burning-2s.wav");
+        }else
+        {
+            AudioStreamSample audioStream = ResourceLoader.Load<AudioStreamSample>(effect.ParticleSoundPath);
             audioPlayer.Stream = audioStream;
             audioPlayer.Play();
         }

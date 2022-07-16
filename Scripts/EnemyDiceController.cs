@@ -22,7 +22,6 @@ public class EnemyDiceController : DiceController
     private void ShowNextSteps()
     {
         int pathMarkerCount = this.GetTree().GetNodesInGroup("PathMarker").Count;
-        if(path.Count > 0) path.RemoveAt(path.Count - 1);
         int selectedPathMarker = 0;
         foreach(Vector3 step in path)
         {
@@ -32,12 +31,16 @@ public class EnemyDiceController : DiceController
                 stepMarker.Translate(step);
                 GD.Print("newCords", step);
                 selectedPathMarker++;
+            }else
+            {
+                break;
             }
         }
     }
 
     public override bool ExecuteTurn()
     {
+        if(IsRolling) return false;
         Move();
         return true;
     }
