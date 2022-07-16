@@ -41,7 +41,8 @@ EffectType = [ "Ice" ]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 2 )
 EffectLocation = [ Vector3( 0, -1, 0 ) ]
 EffectType = [ "FireEffect" ]
-path = [ Vector3( -1, 0, 0 ), Vector3( -1, 0, 0 ), Vector3( -1, 0, 0 ), Vector3( -1, 0, 0 ), Vector3( -1, 0, 0 ) ]
+path = [ Vector3( -1, 0, 0 ), Vector3( -1, 0, 0 ), Vector3( -1, 0, 0 ), Vector3( -1, 0, 0 ) ]
+Patrol = true
 
 [node name="Goal" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0 )

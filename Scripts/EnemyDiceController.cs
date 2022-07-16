@@ -8,26 +8,46 @@ public class EnemyDiceController : DiceController
 {
 
     [Export] private Array<Vector3> path = new Array<Vector3>();
+    [Export] private bool Patrol = false;
+
+    private Array<Vector3> currentPath = new Array<Vector3>();
+    private bool lastPathDirection = false;
+
+
 
     public override void _Ready()
     {
         base._Ready();
+        FillPath(false);
         ShowNextSteps();
+    }
+
+    private void FillPath(bool reverse)
+    {
+        currentPath.Clear();
+        if(reverse) foreach(Vector3 pos in path) currentPath.Insert(0, pos * -1);
+        else foreach(Vector3 pos in path) currentPath.Add(pos);
     }
 
     public void Move()
     {
-        if(path.Count() > 0)
+        if(currentPath.Count > 0)
         {
-            RollDice(path[0]);
-            path.RemoveAt(0);
-            
+            RollDice(currentPath[0]);
+            currentPath.RemoveAt(0);
+
+            if(Patrol && currentPath.Count == 0)
+            {
+                lastPathDirection = !lastPathDirection;
+                FillPath(lastPathDirection);
+                GD.Print(currentPath);
+            }
         }
     }
 
     public void setFrozen()
     {
-        path.Insert(0, new Vector3(0, 0, 0));
+        currentPath.Insert(0, new Vector3(0, 0, 0));
     }
 
     private void ShowNextSteps()
@@ -41,8 +61,8 @@ public class EnemyDiceController : DiceController
                 stepMarker.Translation = this.GetChild<Spatial>(0).Translation;
                 for(int i = 0; i <= pathMarkerCount; i++)
                 {
-                    if(i >= path.Count) break;
-                    stepMarker.Translation += path[i];
+                    if(i >= currentPath.Count) break;
+                    stepMarker.Translation += currentPath[i];
                 }
                 pathMarkerCount++;
             }
