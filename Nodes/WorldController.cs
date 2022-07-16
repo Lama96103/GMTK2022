@@ -5,12 +5,15 @@ public class WorldController : Spatial
 {
     public static WorldController Instance {get;private set;}
 
+    public static string CurrentLevelPath = "res://Nodes/Level/Level_001.tscn";
+
     private LevelController currentLevel;
 
     public override void _Ready()
     {
         WorldController.Instance = this;
-        LoadLevel("res://Nodes/Level/Level_003.tscn");
+
+        LoadLevel(CurrentLevelPath);
     }
 
     public void LoadLevel(NodePath path)
@@ -20,6 +23,7 @@ public class WorldController : Spatial
             this.RemoveChild(currentLevel);
             currentLevel.QueueFree();
         }
+        CurrentLevelPath = path;
 
         PackedScene scene = (PackedScene)ResourceLoader.Load(path);
         currentLevel = scene.Instance<LevelController>();
@@ -33,7 +37,7 @@ public class WorldController : Spatial
 
     public void LoadDeathMenu()
     {
-        this.GetTree().ChangeScene("res://Nodes/Menu/MainMenu.tscn");
+        this.GetTree().ChangeScene("res://Nodes/Menu/DeathMenu.tscn");
     }
 
 }

@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/fire_icon.jpg-5f12230f1de8fa334262945ece590302.s3tc.stex"
-path.etc2="res://.import/fire_icon.jpg-5f12230f1de8fa334262945ece590302.etc2.stex"
+path.s3tc="res://.import/ice-spear.png-69aecc243405b2f6f75f904d519e966e.s3tc.stex"
+path.etc2="res://.import/ice-spear.png-69aecc243405b2f6f75f904d519e966e.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Textures/fire_icon.jpg"
-dest_files=[ "res://.import/fire_icon.jpg-5f12230f1de8fa334262945ece590302.s3tc.stex", "res://.import/fire_icon.jpg-5f12230f1de8fa334262945ece590302.etc2.stex" ]
+source_file="res://Textures/ice-spear.png"
+dest_files=[ "res://.import/ice-spear.png-69aecc243405b2f6f75f904d519e966e.s3tc.stex", "res://.import/ice-spear.png-69aecc243405b2f6f75f904d519e966e.etc2.stex" ]
 
 [params]
 

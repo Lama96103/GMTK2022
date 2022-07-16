@@ -17,9 +17,7 @@ script = ExtResource( 1 )
 mesh = SubResource( 1 )
 
 [node name="StepTwo" type="MeshInstance" parent="." groups=["PathMarker"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0 )
 mesh = SubResource( 1 )
 
 [node name="StepThree" type="MeshInstance" parent="." groups=["PathMarker"]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0 )
 mesh = SubResource( 1 )

@@ -6,8 +6,9 @@ using System.Collections.Generic;
 [Tool]
 public class LevelController : Spatial
 {
-    [Export] private float SizeX = 10.5f;
-    [Export] private float SizeZ = 10.5f;
+    [Export] private float SizeX = 15.5f;
+    [Export] private float SizeZ = 15.5f;
+    [Export] private string NextLevel = "";
 
     private System.Collections.Generic.Dictionary<Vector3, GridState> gridStatus = new System.Collections.Generic.Dictionary<Vector3, GridState>();
 
@@ -101,9 +102,23 @@ public class LevelController : Spatial
 
 
             if(gridStatus[affectedPos].Effect != null)
+            {   
+                if(gridStatus[affectedPos].Effect.GetType() == typeof(FireEffect))
+                    continue;
+                else
+                {
+                    foreach(Spatial particle in gridStatus[affectedPos].ParticleEffects)
+                    {
+                        this.RemoveChild(particle);
+                    }
+                    gridStatus[affectedPos].Effect = null;
+                    gridStatus[affectedPos].ParticleEffects.Clear();
+                }
+            }
+
+            if(gridStatus[affectedPos].Effect != null)
             {
-                gridStatus[affectedPos].EffectDuration = effect.Duration;
-                continue;
+                 
             }
 
 
@@ -209,7 +224,7 @@ public class LevelController : Spatial
         mesh.ColorFormat = MultiMesh.ColorFormatEnum.Color8bit;
         mesh.CustomDataFormat = MultiMesh.CustomDataFormatEnum.None;
 
-        mesh.InstanceCount =  1000;
+        mesh.InstanceCount =  5000;
         float y = 0;
         int index = 0;
         for(float x = -SizeX; x <= SizeX; x++)
