@@ -19,7 +19,6 @@ public class LevelController : Spatial
 
     public void AddEffect(IGridEffect effect, Vector3 position)
     {
-        GD.Print("Adding effect add ", position);
         foreach(Vector3 loc in effect.Locations)
         {
             Vector3 affectedPos = position + loc;
@@ -58,38 +57,10 @@ public class LevelController : Spatial
             gridStatus.Add(position, new GridState());
             gridStatus[position].Dice = dice;
         }
-
-        GD.Print("Dice is at location ", position);
-    }
-
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
-    public override void _Process(float delta)
-    {
-        DrawGrid();
     }
 
     private void DrawGrid()
     {
-        /*
-        DebugControl debugControl = null;
-        if(Engine.EditorHint)
-        {
-            debugControl = GetNodeOrNull<DebugControl>("DebugDraw/Control");
-            if(debugControl == null)
-            {
-                PackedScene debugScene = ResourceLoader.Load("res://addons/DebugDraw.tscn") as PackedScene;
-                Node debug = debugScene.Instance();
-                AddChild(debug);
-                GD.Print("Adding DebugControl");
-                if(debugControl == null) return;        
-            }
-        }
-        else
-        {
-            debugControl = DebugControl.Instance;
-        }
-        */
-
         MultiMeshInstance multiMeshInstance = GetChild<MultiMeshInstance>(0);
 
         MultiMesh mesh = new MultiMesh();
@@ -101,9 +72,6 @@ public class LevelController : Spatial
         mesh.CustomDataFormat = MultiMesh.CustomDataFormatEnum.None;
 
         mesh.InstanceCount =  1000;
-        //mesh.VisibleInstanceCount = field.BG_MaxAsteroidCount;
-
-
         float y = -0.5f;
         int index = 0;
         for(float x = -SizeX; x <= SizeX; x++)
@@ -132,14 +100,6 @@ public class LevelController : Spatial
             }
         }
         mesh.VisibleInstanceCount = index;
-
-        foreach(var item in gridStatus)
-        {
-            if(item.Value.Effect != null)
-            {
-                //debugControl.DebugBox(item.Key, 0.5f, new Color(1,0,0));
-            }
-        }
     }
 }
 
