@@ -35,3 +35,4 @@ projection = 1
 size = 7.613
 
 [node name="Level_001" parent="." instance=ExtResource( 2 )]
+pause_mode = 1

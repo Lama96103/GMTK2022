@@ -9,6 +9,7 @@ public abstract class DiceController : Spatial
     private Vector3 startPosition;
     private Vector3 endPosition;
 
+    private Spatial currentGimbal;
     private Vector3 startRotation;
     private Vector3 endRotation;
     private float progress;
@@ -16,6 +17,7 @@ public abstract class DiceController : Spatial
     private bool isRolling = false;
 
     public LevelController CurrentLevel = null;
+
 
 
     public override void _Ready()
@@ -36,13 +38,13 @@ public abstract class DiceController : Spatial
                 this.Translation = newPosition;
 
                 Vector3 newRotation = startRotation.LinearInterpolate(endRotation, progress);
-                this.GetChild<Spatial>(0).RotationDegrees = newRotation;
+                currentGimbal.Rotation = newRotation;
             }
             else
             {
                 isRolling = false;
                 this.Translation = endPosition;
-                this.GetChild<Spatial>(0).RotationDegrees = endRotation;
+                currentGimbal.Rotation = endRotation;
 
                 CurrentLevel.UpdateDiceLocation(this, this.Translation);
 
@@ -57,17 +59,37 @@ public abstract class DiceController : Spatial
         startPosition = this.Translation;
         endPosition = this.Translation + direction;
 
-        startRotation = this.GetChild<Spatial>(0).RotationDegrees;
-
         
-        if(direction == Vector3.Right) endRotation = this.GetChild<Spatial>(0).RotationDegrees + (Vector3.Forward * 90);
-        if(direction == Vector3.Left) endRotation = this.GetChild<Spatial>(0).RotationDegrees + (Vector3.Back * 90);
-        if(direction == Vector3.Forward) endRotation = this.GetChild<Spatial>(0).RotationDegrees + (Vector3.Left * 90);
-        if(direction == Vector3.Back) endRotation = this.GetChild<Spatial>(0).RotationDegrees + (Vector3.Right * 90);
+
+
+        currentGimbal = this.GetChild<Spatial>(0);
+        startRotation = currentGimbal.Rotation;
+
+
+        endRotation = startRotation + (Vector3.Up.Cross(direction.Rotated(startRotation.Normalized(), startRotation.Length())) * (Mathf.Pi / 2));
+
+        /*
+        if(direction == Vector3.Forward )
+            endRotation = startRotation + (currentGimbal.GlobalTransform.basis.y.Cross(-currentGimbal.GlobalTransform.basis.z) * Mathf.Deg2Rad(90));
+        if(direction == Vector3.Back )
+            endRotation = startRotation + (currentGimbal.GlobalTransform.basis.y.Cross(currentGimbal.GlobalTransform.basis.z) * Mathf.Deg2Rad(90));
+        if(direction == Vector3.Left )
+            endRotation = startRotation + (currentGimbal.GlobalTransform.basis.y.Cross(-currentGimbal.GlobalTransform.basis.x) * Mathf.Deg2Rad(90));
+        if(direction == Vector3.Right )
+            endRotation = startRotation + (currentGimbal.GlobalTransform.basis.y.Cross(currentGimbal.GlobalTransform.basis.x) * Mathf.Deg2Rad(90));
+        */
+       
+        
 
         progress = 0;
         isRolling = true;
+    }   
+
+    private Vector3 Rad2Deg(Vector3 inV)
+    {
+        return new Vector3(Mathf.Rad2Deg(inV.x), Mathf.Rad2Deg(inV.y), Mathf.Rad2Deg(inV.z));
     }
+
 
     public abstract bool ExecuteTurn();
 }
