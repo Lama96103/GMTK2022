@@ -18,7 +18,6 @@ public class GameOver : Spatial
     {
         foreach(DiceController dice in this.GetTree().GetNodesInGroup("EnemyDice"))
         {
-            GD.Print("Dice", dice.GetChild<Spatial>(0).GlobalTransform.origin, "Goal", this.GlobalTransform.origin);
             if(dice.GetChild<Spatial>(0).GlobalTransform.origin.Equals(this.GlobalTransform.origin))
             {
                 GD.Print("Game Over");
