@@ -14,7 +14,7 @@ public interface IGridEffect
 
 public class FireEffect : IGridEffect
 {
-    public int Duration => 2;
+    public int Duration => 1;
     public Vector3[] Locations => new Vector3[]{Vector3.Right, Vector3.Left, Vector3.Forward, Vector3.Back};
     public string ParticleEffectPath => "res://Particles/StylizedFire/FireEffect.tscn";
 
@@ -26,7 +26,9 @@ public class FireEffect : IGridEffect
         if(dice.IsInGroup("EnemyDice"))
         {
             dice.QueueFree();
-        }else
+            dice.CurrentLevel.RemoveDice(dice);
+        }
+        else
         {
             WorldController.Instance.LoadDeathMenu();
         }
