@@ -103,8 +103,7 @@ public abstract class DiceController : Spatial
     private void PlaySound(IGridEffect effect)
     {
         String path = "res://Sounds and Music/Sounds/";
-        int lastIndex = CurrentLevel.GetParent().GetChildCount();
-        AudioStreamPlayer audioPlayer = CurrentLevel.GetParent().GetChild<AudioStreamPlayer>(lastIndex - 1);
+        AudioStreamPlayer audioPlayer = CurrentLevel.GetParent().GetNode<AudioStreamPlayer>("AudioStreamPlayerSounds");
         if(effect == null)
         {
             String[] diceSounds = new String[4];
