@@ -15,6 +15,8 @@ public abstract class DiceController : Spatial
 
     public bool IsRolling = false;
 
+    public Vector3 currentDirection;
+
     public override void _Ready()
     {
        dice = GetChild<Spatial>(0);
@@ -77,6 +79,7 @@ public abstract class DiceController : Spatial
     public void RollDice(Vector3 direction)
     {
         IsRolling = true;
+        currentDirection = direction;
         dice.Call("roll", direction);
         PlaySound(null);
     }
@@ -91,7 +94,11 @@ public abstract class DiceController : Spatial
             {
                 GD.Print("Fired " , this.Name);
                 int index = EffectLocation.IndexOf(item.Key);
-                FireEffect effect = new FireEffect();
+                IGridEffect effect = new FireEffect();
+                if(EffectType[index] == "Ice")
+                {
+                    effect = new IceEffect(currentDirection);
+                }
                 CurrentLevel.AddEffect(effect, dice.GlobalTransform.origin, this);
                 PlaySound(effect);
             }

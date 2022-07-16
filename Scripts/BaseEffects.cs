@@ -22,7 +22,6 @@ public class FireEffect : IGridEffect
 
     public void ApplyEffect(DiceController dice)
     {
-        GD.Print(dice);
         if(dice.IsInGroup("EnemyDice"))
         {
             dice.QueueFree();
@@ -32,5 +31,28 @@ public class FireEffect : IGridEffect
         {
             WorldController.Instance.LoadDeathMenu();
         }
+    }
+}
+
+public class IceEffect : IGridEffect
+{
+    private Vector3 effectDirection;
+
+    public int Duration => 3;
+
+    public string ParticleEffectPath => "res://Particles/IceEffect.tscn";
+
+    public string ParticleSoundPath => "res://Sounds and Music/Sounds/mixkit-fire-swoosh-burning-2s.wav"; //CHANGE
+
+    public Vector3[] Locations => new Vector3[]{effectDirection, effectDirection * 2, effectDirection * 3};
+
+    public IceEffect(Vector3 effectDirection)
+    {
+        this.effectDirection = effectDirection;
+    }
+
+    public void ApplyEffect(DiceController dice)
+    {
+        
     }
 }

@@ -10,7 +10,7 @@ public class WorldController : Spatial
     public override void _Ready()
     {
         WorldController.Instance = this;
-        LoadLevel("res://Nodes/Level/Level_002.tscn");
+        LoadLevel("res://Nodes/Level/Level_Test.tscn");
     }
 
     public void LoadLevel(NodePath path)
