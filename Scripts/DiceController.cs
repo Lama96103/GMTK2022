@@ -74,11 +74,16 @@ public abstract class DiceController : Spatial
     }
 
 
-    public void RollDice(Vector3 direction)
+    public bool RollDice(Vector3 direction)
     {
-        IsRolling = true;
-        dice.Call("roll", direction);
-        PlaySound(null);
+        if(CurrentLevel.CanMoveTo(dice.GlobalTransform.origin))
+        {
+            IsRolling = true;
+            dice.Call("roll", direction);
+            PlaySound(null);
+            return true;
+        }
+        return false;
     }
 
     private void OnDiceRolled()

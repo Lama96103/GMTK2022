@@ -154,6 +154,14 @@ public class LevelController : Spatial
         }
     }
 
+    public bool CanMoveTo(Vector3 position)
+    {
+        if(gridStatus.TryGetValue(position, out GridState value))
+        {
+            return value.Dice == null;
+        }
+        return true;
+    }
     public void CalulcateEffectsDuration()
     {
         foreach(var item in gridStatus)
