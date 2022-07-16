@@ -15,6 +15,7 @@ public class LevelController : Spatial
 
     private int currentDice = 0;
     private Array<DiceController> executionOrder;
+    private Array<DiceController> alreadyExecutedDice = new Array<DiceController>();
 
     private bool startedRolling = false;
     private float enemyCountDown = -1;
@@ -42,6 +43,7 @@ public class LevelController : Spatial
         {
             if(executionOrder[currentDice].ExecuteTurn())
             {
+                alreadyExecutedDice.Add(executionOrder[currentDice]);
                 startedRolling = true;
             }
         }
@@ -57,12 +59,18 @@ public class LevelController : Spatial
     private void ProgressRound()
     {
         currentDice = (currentDice + 1) % executionOrder.Count;
+        if(currentDice == 0)
+            alreadyExecutedDice.Clear();
+
+
         startedRolling = false;
         enemyCountDown = 0.3f;
         if(currentDice == 0 || currentDice == 1)
         {
             CalulcateEffectsDuration();
         }
+
+        if(alreadyExecutedDice.Contains(executionOrder[currentDice])) ProgressRound();
     }
 
     private void FindDice()
