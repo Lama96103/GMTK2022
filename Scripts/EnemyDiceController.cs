@@ -36,7 +36,8 @@ public class EnemyDiceController : DiceController
                 stepMarker.Translation = this.GetChild<Spatial>(0).Translation;
                 for(int i = 0; i <= pathMarkerCount; i++)
                 {
-                     stepMarker.Translation += path[i];
+                    if(i >= path.Count) break;
+                    stepMarker.Translation += path[i];
                 }
                 pathMarkerCount++;
             }

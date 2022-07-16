@@ -9,23 +9,19 @@ public class PlayerDiceController : DiceController
     {
         if(Input.IsActionJustPressed("key_forward"))
         {
-            RollDice(Vector3.Forward);
-            return true;
+            return RollDice(Vector3.Forward);
         }
         if(Input.IsActionJustPressed("key_backward"))
         {
-            RollDice(Vector3.Back);
-            return true;
+            return RollDice(Vector3.Back);
         }
         if(Input.IsActionJustPressed("key_right"))
         {
-            RollDice(Vector3.Right);
-            return true;
+            return RollDice(Vector3.Right);
         }
         if(Input.IsActionJustPressed("key_left"))
         {
-            RollDice(Vector3.Left);
-            return true;
+            return RollDice(Vector3.Left);
         }
         
         return false;

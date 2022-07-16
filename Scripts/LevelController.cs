@@ -133,7 +133,10 @@ public class LevelController : Spatial
         bool foundLocation = false;
         foreach(var item in gridStatus)
         {
-            if(item.Value.Dice == dice) item.Value.Dice = null;
+            if(item.Value.Dice == dice)
+            {
+                item.Value.Dice = null;
+            } 
 
             if(item.Key == position)
             {
@@ -154,6 +157,14 @@ public class LevelController : Spatial
         }
     }
 
+    public bool CanMoveTo(Vector3 position)
+    {
+        if(gridStatus.TryGetValue(position, out GridState value))
+        {
+            return value.Dice == null;
+        }
+        return true;
+    }
     public void CalulcateEffectsDuration()
     {
         foreach(var item in gridStatus)
