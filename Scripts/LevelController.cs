@@ -19,17 +19,26 @@ public class LevelController : Spatial
 
     public void AddEffect(IGridEffect effect, Vector3 position)
     {
+        PackedScene particleEffect = ResourceLoader.Load<PackedScene>(effect.ParticleEffectPath);
+
         foreach(Vector3 loc in effect.Locations)
         {
             Vector3 affectedPos = position + loc;
             if(!gridStatus.ContainsKey(affectedPos)) gridStatus.Add(affectedPos, new GridState());
 
 
+            // ToDo: Catch if there is already an effect present
+
             gridStatus[affectedPos].Effect = effect;
             gridStatus[affectedPos].EffectDuration = effect.Duration;
 
             if(gridStatus[affectedPos].Dice != null)
                 gridStatus[affectedPos].Effect.ApplyEffect(gridStatus[affectedPos].Dice);
+
+            Spatial particleEffectObject = particleEffect.Instance<Spatial>();
+            this.AddChild(particleEffectObject);
+            particleEffectObject.TranslateObjectLocal(affectedPos);
+            gridStatus[affectedPos].ParticleEffects.Add(particleEffectObject);
         }
     }
 
@@ -59,6 +68,26 @@ public class LevelController : Spatial
         }
     }
 
+    public void OnRoundStart()
+    {
+        foreach(var item in gridStatus)
+        {
+            if(item.Value.Effect != null)
+            {
+                item.Value.EffectDuration--;
+
+                if(item.Value.EffectDuration <= 0)
+                {
+                    foreach(Spatial particle in item.Value.ParticleEffects)
+                    {
+                        this.RemoveChild(particle);
+                    }
+                    item.Value.Effect = null;
+                    item.Value.ParticleEffects.Clear();
+                }
+            }
+        }
+    }
     private void DrawGrid()
     {
         MultiMeshInstance multiMeshInstance = GetChild<MultiMeshInstance>(0);
@@ -109,5 +138,7 @@ public class GridState
 
     public IGridEffect Effect = null;
     public int EffectDuration;
+
+    public List<Spatial> ParticleEffects = new List<Spatial>();
 }
 

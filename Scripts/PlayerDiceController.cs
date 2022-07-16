@@ -12,14 +12,6 @@ public class PlayerDiceController : DiceController
     {
         
     }
-    public override void _Process(float delta)
-    {
-        base._Process(delta);
-        if(Input.IsActionJustPressed("ui_accept"))
-        {
-            this.GetParent().GetChild<LevelController>(3).AddEffect(new FireEffect(), this.Translation);
-        }
-    }
 
     public override bool ExecuteTurn()
     {

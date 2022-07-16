@@ -23,7 +23,7 @@ public abstract class DiceController : Spatial
         //RollDice(Vector3.Right);
     }
 
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
+    // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
         if(isRolling)
@@ -45,6 +45,8 @@ public abstract class DiceController : Spatial
                 this.GetChild<Spatial>(0).RotationDegrees = endRotation;
 
                 CurrentLevel.UpdateDiceLocation(this, this.Translation);
+
+                CurrentLevel.AddEffect(new FireEffect(), this.Translation);
             }
         }
     }

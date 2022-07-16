@@ -26,6 +26,8 @@ public class TurnController : Node
         if(executionOrder[currentDice].ExecuteTurn())
         {
             currentDice = (currentDice + 1) % executionOrder.Count;
+
+            if(currentDice == 0) levelController.OnRoundStart();
         }
 
         
