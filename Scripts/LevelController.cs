@@ -17,6 +17,7 @@ public class LevelController : Spatial
     private Array<DiceController> executionOrder;
 
     private bool startedRolling = false;
+    private float enemyCountDown = -1;
 
     public override void _Ready()
     {
@@ -29,6 +30,12 @@ public class LevelController : Spatial
         if(executionOrder == null)
         {
             FindDice();
+        }
+
+        if(currentDice != 0 && enemyCountDown > 0)
+        {
+            enemyCountDown -= delta;
+            return;
         }
         
         if(!startedRolling)
@@ -48,6 +55,7 @@ public class LevelController : Spatial
                     OnRoundStart();
                 }
                 startedRolling = false;
+                enemyCountDown = 0.5f;
             }
         }
     }
