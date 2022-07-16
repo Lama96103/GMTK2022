@@ -44,19 +44,24 @@ public class LevelController : Spatial
             {
                 startedRolling = true;
             }
-        }else
+        }
+        else
         {
             if(!executionOrder[currentDice].IsRolling)
             {
-                currentDice = (currentDice + 1) % executionOrder.Count;
-
-                if(currentDice == 0)
-                {
-                    OnRoundStart();
-                }
-                startedRolling = false;
-                enemyCountDown = 0.5f;
+                ProgressRound();
             }
+        }
+    }
+
+    private void ProgressRound()
+    {
+        currentDice = (currentDice + 1) % executionOrder.Count;
+        startedRolling = false;
+        enemyCountDown = 0.3f;
+        if(currentDice == 0 || currentDice == 1)
+        {
+            CalulcateEffectsDuration();
         }
     }
 
@@ -77,7 +82,7 @@ public class LevelController : Spatial
         }
     }
 
-    public void AddEffect(IGridEffect effect, Vector3 position)
+    public void AddEffect(IGridEffect effect, Vector3 position, DiceController dice)
     {
         PackedScene particleEffect = ResourceLoader.Load<PackedScene>(effect.ParticleEffectPath);
 
@@ -87,10 +92,16 @@ public class LevelController : Spatial
             if(!gridStatus.ContainsKey(affectedPos)) gridStatus.Add(affectedPos, new GridState());
 
 
-            // ToDo: Catch if there is already an effect present
+            if(gridStatus[affectedPos].Effect != null)
+            {
+                gridStatus[affectedPos].EffectDuration = effect.Duration;
+                continue;
+            }
+
 
             gridStatus[affectedPos].Effect = effect;
             gridStatus[affectedPos].EffectDuration = effect.Duration;
+            gridStatus[affectedPos].IsPlayerEffect = dice == executionOrder[0];
 
             if(gridStatus[affectedPos].Dice != null)
                 gridStatus[affectedPos].Effect.ApplyEffect(gridStatus[affectedPos].Dice);
@@ -99,6 +110,21 @@ public class LevelController : Spatial
             this.AddChild(particleEffectObject);
             particleEffectObject.TranslateObjectLocal(affectedPos);
             gridStatus[affectedPos].ParticleEffects.Add(particleEffectObject);
+        }
+    }
+
+    public void RemoveDice(DiceController dice)
+    {
+        executionOrder.Remove(dice);
+        foreach(var item in gridStatus)
+        {
+            if(item.Value.Dice == dice) item.Value.Dice = null;
+        }
+
+
+        if(currentDice >= executionOrder.Count || executionOrder[currentDice] == null)
+        {
+            ProgressRound();
         }
     }
 
@@ -128,12 +154,15 @@ public class LevelController : Spatial
         }
     }
 
-    public void OnRoundStart()
+    public void CalulcateEffectsDuration()
     {
         foreach(var item in gridStatus)
         {
             if(item.Value.Effect != null)
             {
+                if(item.Value.IsPlayerEffect && currentDice != 0 ) continue;
+                if(!item.Value.IsPlayerEffect && currentDice != 1 ) continue;
+
                 item.Value.EffectDuration--;
 
                 if(item.Value.EffectDuration <= 0)
@@ -148,6 +177,7 @@ public class LevelController : Spatial
             }
         }
     }
+
     private void DrawGrid()
     {
         MultiMeshInstance multiMeshInstance = GetChild<MultiMeshInstance>(0);
@@ -198,6 +228,7 @@ public class GridState
 
     public IGridEffect Effect = null;
     public int EffectDuration;
+    public bool IsPlayerEffect = true;
 
     public List<Spatial> ParticleEffects = new List<Spatial>();
 }

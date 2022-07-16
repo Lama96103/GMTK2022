@@ -83,7 +83,7 @@ public abstract class DiceController : Spatial
 
     private void OnDiceRolled()
     {
-        IsRolling = false;
+        CurrentLevel.UpdateDiceLocation(this, dice.GlobalTransform.origin);
 
         foreach(var item in RayCasts)
         {
@@ -92,13 +92,16 @@ public abstract class DiceController : Spatial
                 GD.Print("Fired " , this.Name);
                 int index = EffectLocation.IndexOf(item.Key);
                 FireEffect effect = new FireEffect();
-                CurrentLevel.AddEffect(effect, dice.GlobalTransform.origin);
+                CurrentLevel.AddEffect(effect, dice.GlobalTransform.origin, this);
                 PlaySound(effect);
             }
         }
 
-        CurrentLevel.UpdateDiceLocation(this, this.GlobalTransform.origin);
+        AfterDiceRolled();
+        IsRolling = false;
     }
+
+    protected virtual void AfterDiceRolled(){}
 
     private void PlaySound(IGridEffect effect)
     {
@@ -124,10 +127,6 @@ public abstract class DiceController : Spatial
         }
     }
 
-    public String ActiveEffect()
-    {
-        return null;
-    }
 
     public abstract bool ExecuteTurn();
 }
