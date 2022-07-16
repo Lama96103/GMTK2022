@@ -39,5 +39,7 @@ size = 7.613
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
-volume_db = 0.5
+volume_db = -10.0
 autoplay = true
+
+[node name="AudioStreamPlayerSounds" type="AudioStreamPlayer" parent="."]
