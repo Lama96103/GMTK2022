@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Nodes/PlayerDice.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Nodes/Level/Level_001.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scripts/CameraController.cs" type="Script" id=3]
 [ext_resource path="res://Scripts/TurnController.cs" type="Script" id=4]
+[ext_resource path="res://Sounds and Music/Music/Opium.mp3" type="AudioStream" id=5]
 
 [sub_resource type="ProceduralSky" id=2]
 
@@ -33,3 +34,8 @@ script = ExtResource( 3 )
 transform = Transform( 1, 0, 0, 0, 0.713336, 0.700822, 0, -0.700822, 0.713336, 0, 9.80722, 11.1934 )
 
 [node name="Level_001" parent="." instance=ExtResource( 2 )]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = 0.5
+autoplay = true
