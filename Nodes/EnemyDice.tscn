@@ -17,6 +17,7 @@ script = ExtResource( 1 )
 diceColor = Color( 0.152941, 0.141176, 0.141176, 1 )
 
 [node name="Dice" parent="." instance=ExtResource( 2 )]
+speed = 6.0
 
 [node name="StepOne" type="MeshInstance" parent="." groups=["PathMarker"]]
 mesh = SubResource( 1 )
