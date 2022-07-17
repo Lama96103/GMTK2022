@@ -43,7 +43,7 @@ EffectType = [ "Fire", "Fire" ]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 2 )
 EffectLocation = [ Vector3( 0, -1, 0 ) ]
 EffectType = [ "FireEffect" ]
-path = [ Vector3( -1, 0, 0 ), Vector3( -1, 0, 0 ), Vector3( 0, 0, -1 ), Vector3( -1, 0, 0 ), Vector3( -1, 0, 0 ), Vector3( -1, 0, 0 ), Vector3( -1, 0, 0 ), Vector3( 0, 0, -1 ), Vector3( 1, 0, -1 ) ]
+path = [ Vector3( -1, 0, 0 ), Vector3( -1, 0, 0 ), Vector3( 0, 0, -1 ), Vector3( -1, 0, 0 ), Vector3( -1, 0, 0 ), Vector3( -1, 0, 0 ), Vector3( -1, 0, 0 ), Vector3( 0, 0, -1 ), Vector3( -1, 0, 0 ), Vector3( -1, 0, 0 ), Vector3( -1, 0, 0 ) ]
 
 [node name="Enemy2" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 3 )
