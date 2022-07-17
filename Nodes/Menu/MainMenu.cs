@@ -36,22 +36,36 @@ public class MainMenu : Control
             if(fileName != "." && fileName != ".." )
             {
                 string fullPath = "res://Nodes/Level/" + fileName;
-
                 GD.Print(fileName);
-                Label l = new Label();
-                l.Align = Label.AlignEnum.Center;
-                l.SizeFlagsHorizontal = (int)(SizeFlags.Expand | SizeFlags.Fill); 
+                string name = fileName.Substring(0, fileName.Length - 5).Remove(0, "Level_".Length);
 
-                Button b = new Button();
-                b.Text = "Start";
-                b.SizeFlagsHorizontal = (int)(SizeFlags.Expand | SizeFlags.Fill); 
+                if(int.TryParse(name, out int result))
+                {
+                    Label l = new Label();
+                    l.Text = "Level " + result;
+                    l.Align = Label.AlignEnum.Center;
+                    l.SizeFlagsHorizontal = (int)(SizeFlags.Expand | SizeFlags.Fill); 
 
-                level.AddChild(l);
-                level.AddChild(b);
-                l.Text = Filename;
+                    Button b = new Button();
+                    b.Text = "Start";
+                    b.SizeFlagsHorizontal = (int)(SizeFlags.Expand | SizeFlags.Fill); 
+                    b.Connect("pressed", this, "LoadSpecificLevel", new Godot.Collections.Array(){fullPath});
+
+                    level.AddChild(l);
+                    level.AddChild(b);
+                }
+
+                
+                
             }
             fileName = dir.GetNext();
         }
+    }
+
+    private void LoadSpecificLevel(string path)
+    {
+        WorldController.CurrentLevelPath = path;
+        this.GetTree().ChangeScene("res://Nodes/World.tscn");
     }
 
     public void ButtonStartGamePressed()
