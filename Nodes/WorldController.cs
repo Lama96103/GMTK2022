@@ -5,14 +5,17 @@ public class WorldController : Spatial
 {
     public static WorldController Instance {get;private set;}
 
-    public static string CurrentLevelPath = "res://Nodes/Level/Level_003.tscn";
+    public static string CurrentLevelPath = "res://Nodes/Level/Level_001.tscn";
 
     private LevelController currentLevel;
+
+    private Control finishedLevelScreen;
 
     public override void _Ready()
     {
         WorldController.Instance = this;
-
+        finishedLevelScreen = GetNode<Control>("Game_UI/Status");
+        finishedLevelScreen.Visible = false;
         LoadLevel(CurrentLevelPath);
     }
 
@@ -30,9 +33,15 @@ public class WorldController : Spatial
         this.AddChild(currentLevel);
     }
 
-
-    public void LoadNextLevel()
+    public void OnFinishedLevel()
     {
+        finishedLevelScreen.Visible = true;
+    }
+
+
+    private void LoadNextLevel()
+    {
+        finishedLevelScreen.Visible = false;
         LoadLevel(currentLevel.NextLevel);
     }
 

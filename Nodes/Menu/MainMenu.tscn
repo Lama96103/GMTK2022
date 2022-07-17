@@ -30,7 +30,7 @@ uppercase = true
 [node name="MarginContainer2" type="MarginContainer" parent="."]
 margin_top = 219.0
 margin_right = 1024.0
-margin_bottom = 376.0
+margin_bottom = 384.0
 custom_constants/margin_right = 400
 custom_constants/margin_top = 125
 custom_constants/margin_left = 400
@@ -39,14 +39,13 @@ custom_constants/margin_left = 400
 margin_left = 400.0
 margin_top = 125.0
 margin_right = 624.0
-margin_bottom = 157.0
-ratio = 4.5
-stretch_mode = 0
+margin_bottom = 165.0
+ratio = 10.0
 
 [node name="Button" type="Button" parent="MarginContainer2/CenterContainer"]
-margin_top = -8.88889
 margin_right = 224.0
-margin_bottom = 40.8889
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
 text = "Play"
 
 [connection signal="pressed" from="MarginContainer2/CenterContainer/Button" to="." method="ButtonStartGamePressed"]

@@ -104,7 +104,7 @@ public class LevelController : Spatial
 
         if(executionOrder.Count == 1)
         {
-            WorldController.Instance.LoadNextLevel();
+            WorldController.Instance.OnFinishedLevel();
         }
     }
 
