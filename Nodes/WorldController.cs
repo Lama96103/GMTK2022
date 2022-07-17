@@ -17,6 +17,9 @@ public class WorldController : Spatial
     private float progressIndicatorTime = 0;
     private bool indicatorAnimationPlaying = false;
 
+    private Control pauseMenu;
+    private Control levelSelect;
+
     public override void _Ready()
     {
         WorldController.Instance = this;
@@ -27,6 +30,10 @@ public class WorldController : Spatial
 
         enemyTurnIndication = GetNode<Control>("Game_UI/TurnIndicator");
         enemyTurnIndication.GetChild<Control>(0).RectScale = new Vector2(0, 0);
+
+        
+        pauseMenu = GetNode<Control>("Game_UI/PauseScreen");
+        pauseMenu.Visible = false;
         LoadLevel(CurrentLevelPath);
     }
 
@@ -44,6 +51,11 @@ public class WorldController : Spatial
                 enemyTurnIndication.GetChild<Control>(0).RectScale = new Vector2(targetIndicatorSize, targetIndicatorSize);
             }
 
+        }
+
+        if(Input.IsActionJustPressed("ui_cancel"))
+        {
+            pauseMenu.Visible = !pauseMenu.Visible;
         }
     }
 
@@ -64,6 +76,7 @@ public class WorldController : Spatial
     public void OnFinishedLevel()
     {
         finishedLevelScreen.Visible = true;
+        pauseMenu.Visible = false;
     }
 
     public void SetCurrentRound(bool isEnemyRound)
@@ -79,6 +92,7 @@ public class WorldController : Spatial
     private void LoadNextLevel()
     {
         finishedLevelScreen.Visible = false;
+        pauseMenu.Visible = false;
         if(string.IsNullOrEmpty(currentLevel.NextLevel)) LoadMainMenu();
         else LoadLevel(currentLevel.NextLevel);
     }
@@ -86,6 +100,7 @@ public class WorldController : Spatial
     private void RetryLevel()
     {
         failureLevelScreen.Visible = false;
+        pauseMenu.Visible = false;
         LoadLevel(CurrentLevelPath);
     }
 
@@ -97,6 +112,7 @@ public class WorldController : Spatial
     public void LoadDeathMenu()
     {
         failureLevelScreen.Visible = true;
+        pauseMenu.Visible = false;
         currentLevel.RemoveLabels();
     }
 
