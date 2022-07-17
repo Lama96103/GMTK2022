@@ -93,6 +93,7 @@ public abstract class DiceController : Spatial
 
     public bool RollDice(Vector3 direction)
     {
+        if(direction == Vector3.Zero) return true;
         if(CurrentLevel.CanMoveTo(dice.GlobalTransform.origin + direction))
         {
             IsRolling = true;

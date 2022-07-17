@@ -4,7 +4,7 @@ using System;
 public class WorldController : Spatial
 {
     public static WorldController Instance {get;private set;}
-    public static string CurrentLevelPath = "res://Nodes/Level/Level_008.tscn";
+    public static string CurrentLevelPath = "res://Nodes/Level/Level_001.tscn";
 
 
     private LevelController currentLevel;
@@ -57,6 +57,8 @@ public class WorldController : Spatial
         {
             pauseMenu.Visible = !pauseMenu.Visible;
         }
+
+        if(Input.IsActionJustPressed("ui_accept")) LoadNextLevel();
     }
 
     public void LoadLevel(NodePath path)

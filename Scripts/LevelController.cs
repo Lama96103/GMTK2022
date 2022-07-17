@@ -204,6 +204,7 @@ public class LevelController : Spatial
     /// <returns>True: Dice is affected by an already exisiting effect, False: Did not get an effect</returns>
     public bool UpdateDiceLocation(DiceController dice, Vector3 position)
     {
+        bool returnValue = false;
         bool foundLocation = false;
         foreach(var item in gridStatus)
         {
@@ -228,7 +229,7 @@ public class LevelController : Spatial
                             {
                                 RemoveEffect(item.Key);
                             }
-                            return true;
+                            returnValue = true;
                         }
                     }
                     else
@@ -237,7 +238,7 @@ public class LevelController : Spatial
                         {
                             RemoveEffect(item.Key);
                         }
-                        return true;
+                        returnValue = true;
                     }
                         
                     
@@ -250,7 +251,7 @@ public class LevelController : Spatial
             gridStatus.Add(position, new GridState());
             gridStatus[position].Dice = dice;
         }
-        return false;
+        return returnValue;
     }
 
     public bool CanMoveTo(Vector3 position)

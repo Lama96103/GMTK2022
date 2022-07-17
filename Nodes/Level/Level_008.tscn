@@ -1,10 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Models/GridPart_Cube002.mesh" type="ArrayMesh" id=1]
 [ext_resource path="res://Nodes/EnemyDice.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Nodes/Goal.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Nodes/PlayerDice.tscn" type="PackedScene" id=4]
-[ext_resource path="res://fonts/kirifont/Kirifont.tres" type="DynamicFont" id=5]
 [ext_resource path="res://Scripts/LevelController.cs" type="Script" id=6]
 
 [sub_resource type="MultiMesh" id=3]
@@ -65,15 +64,3 @@ path = [ Vector3( 0, 0, -1 ), Vector3( 0, 0, -1 ), Vector3( 0, 0, -1 ), Vector3(
 Patrol = true
 
 [node name="Goal" parent="." instance=ExtResource( 3 )]
-
-[node name="Label3D" type="Label3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0844642, 2.28033, 4.74543 )
-cast_shadow = 0
-pixel_size = 0.0115
-billboard = 1
-modulate = Color( 0, 0, 0, 1 )
-outline_modulate = Color( 1, 1, 1, 1 )
-text = "You can move on the beacon
-"
-font = ExtResource( 5 )
-autowrap = true

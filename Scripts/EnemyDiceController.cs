@@ -70,8 +70,11 @@ public class EnemyDiceController : DiceController
                 }
                 iceMeshes.Clear();
             }
-            RollDice(currentPath[0]);
-            currentPath.RemoveAt(0);
+            
+            if(RollDice(currentPath[0]))
+            {
+                currentPath.RemoveAt(0);
+            }
 
             if(Patrol && currentPath.Count == 0)
             {
