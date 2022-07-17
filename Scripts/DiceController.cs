@@ -17,7 +17,7 @@ public abstract class DiceController : Spatial
     public bool IsRolling = false;
 
     public Vector3 currentDirection;
-    private AudioStreamPlayer3D soundEffectSteamPlayer;
+    public AudioStreamPlayer3D soundEffectSteamPlayer;
 
     public override void _Ready()
     {
@@ -130,6 +130,7 @@ public abstract class DiceController : Spatial
     private IGridEffect GetEffect(string effectName, Vector3 dir )
     {
         if(effectName.Contains("Ice")) return new IceEffect(dir);
+        if(effectName.Contains("Landmine")) return new MineEffect();
         else return new FireEffect();
     }
 

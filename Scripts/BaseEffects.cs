@@ -69,3 +69,34 @@ public class IceEffect : IGridEffect
         }
     }
 }
+
+public class MineEffect : IGridEffect
+{
+    public int Duration => 1000;
+
+    public string ParticleEffectPath => "res://Nodes/Landmine.tscn";
+
+    public string ParticleSoundPath => "res://Sounds and Music/Sounds/mixkit-putdown-mine.wav";
+
+    public string DiceMaterialPath => "res://Materials/Dice_MineEffect.tres";
+
+    public bool EffectsPlayer => true;
+
+    public Vector3[] Locations => new Vector3[]{Vector3.Zero};
+
+    public void ApplyEffect(DiceController dice)
+    {
+        AudioStreamSample audioStream = ResourceLoader.Load<AudioStreamSample>("res://Sounds and Music/Sounds/mixkit-explosion-hit.wav");
+        dice.soundEffectSteamPlayer.Stream = audioStream;
+        dice.soundEffectSteamPlayer.Play();
+        if(dice.IsInGroup("EnemyDice"))
+        {
+            ((EnemyDiceController)dice).SetDead();
+            dice.CurrentLevel.RemoveDice(dice);
+        }
+        else
+        {
+            WorldController.Instance.LoadDeathMenu();
+        }
+    }
+}
