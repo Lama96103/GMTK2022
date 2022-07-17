@@ -111,6 +111,11 @@ public class LevelController : Spatial
         if(executionOrder.Count == 1)
         {
             WorldController.Instance.OnFinishedLevel();
+            foreach(Spatial child in GetChildren())
+            {
+                Label3D label = child as Label3D;
+                if(label != null) label.Visible = false;
+            }
         }
     }
 

@@ -10,6 +10,7 @@ public class WorldController : Spatial
     private LevelController currentLevel;
 
     private Control finishedLevelScreen;
+    private Control failureLevelScreen;
     private Control enemyTurnIndication;
     private float startIndicatorSize = 0;
     private float targetIndicatorSize = 0;
@@ -19,10 +20,13 @@ public class WorldController : Spatial
     public override void _Ready()
     {
         WorldController.Instance = this;
-        finishedLevelScreen = GetNode<Control>("Game_UI/Status");
+        finishedLevelScreen = GetNode<Control>("Game_UI/VictoryScreen");
+        failureLevelScreen = GetNode<Control>("Game_UI/FailureScreen");
+        finishedLevelScreen.Visible = false;
+        failureLevelScreen.Visible = false;
+
         enemyTurnIndication = GetNode<Control>("Game_UI/TurnIndicator");
         enemyTurnIndication.GetChild<Control>(0).RectScale = new Vector2(0, 0);
-        finishedLevelScreen.Visible = false;
         LoadLevel(CurrentLevelPath);
     }
 
@@ -64,19 +68,25 @@ public class WorldController : Spatial
 
     public void SetCurrentRound(bool isEnemyRound)
     {
-        indicatorAnimationPlaying = true;
-        progressIndicatorTime = 0;
         startIndicatorSize = isEnemyRound ? 0 : 1;
         targetIndicatorSize = isEnemyRound ? 1 : 0;
-        
-
+        if(targetIndicatorSize == enemyTurnIndication.GetChild<Control>(0).RectScale.x) return;
+        indicatorAnimationPlaying = true;
+        progressIndicatorTime = 0;
     }
 
 
     private void LoadNextLevel()
     {
         finishedLevelScreen.Visible = false;
-        LoadLevel(currentLevel.NextLevel);
+        if(string.IsNullOrEmpty(currentLevel.NextLevel)) LoadMainMenu();
+        else LoadLevel(currentLevel.NextLevel);
+    }
+
+    private void RetryLevel()
+    {
+        failureLevelScreen.Visible = false;
+        LoadLevel(CurrentLevelPath);
     }
 
     public void LoadMainMenu()
@@ -86,7 +96,7 @@ public class WorldController : Spatial
 
     public void LoadDeathMenu()
     {
-        this.GetTree().ChangeScene("res://Nodes/Menu/DeathMenu.tscn");
+        failureLevelScreen.Visible = true;
     }
 
 }
