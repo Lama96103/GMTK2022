@@ -10,6 +10,7 @@ height = 0.2
 
 [node name="EnemyDice" type="Spatial" groups=["EnemyDice"]]
 script = ExtResource( 1 )
+diceColor = Color( 0.152941, 0.141176, 0.141176, 1 )
 
 [node name="Dice" parent="." instance=ExtResource( 2 )]
 

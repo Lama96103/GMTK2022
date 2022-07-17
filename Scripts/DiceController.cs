@@ -6,6 +6,7 @@ public abstract class DiceController : Spatial
 {
     [Export] Godot.Collections.Array<Vector3> EffectLocation = new Godot.Collections.Array<Vector3> ();
     [Export] Godot.Collections.Array<string> EffectType = new Godot.Collections.Array<string>();
+    [Export] Color diceColor = new Color();
     public LevelController CurrentLevel;
 
     private Godot.Collections.Dictionary<Vector3, RayCast> RayCasts = new Godot.Collections.Dictionary<Vector3, RayCast>();
@@ -22,6 +23,10 @@ public abstract class DiceController : Spatial
     {
        dice = GetChild<Spatial>(0);
        dice.Connect("DiceRolled", this, "OnDiceRolled");
+       MeshInstance mi = (MeshInstance) dice.GetChild(0).GetChild(0);
+       SpatialMaterial spatialMat = new SpatialMaterial();
+       spatialMat.AlbedoColor = diceColor;
+       mi.MaterialOverride = spatialMat;
 
        soundEffectSteamPlayer = new AudioStreamPlayer3D();
        this.AddChild(soundEffectSteamPlayer);

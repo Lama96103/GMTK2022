@@ -5,5 +5,6 @@
 
 [node name="Player" type="Spatial"]
 script = ExtResource( 1 )
+diceColor = Color( 0.823529, 0.823529, 0.823529, 1 )
 
 [node name="Dice" parent="." instance=ExtResource( 2 )]
