@@ -1,11 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Nodes/EnemyDice.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/LevelController.cs" type="Script" id=2]
 [ext_resource path="res://Nodes/Goal.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Models/GridPart_Cube002.mesh" type="ArrayMesh" id=4]
 [ext_resource path="res://Nodes/PlayerDice.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Particles/LevelSuccess.tscn" type="PackedScene" id=6]
 
 [sub_resource type="MultiMesh" id=3]
 color_format = 1
@@ -44,8 +43,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0 )
 EffectLocation = [ Vector3( 0, -1, 0 ) ]
 EffectType = [ "FireEffect" ]
 path = [ Vector3( -1, 0, 0 ), Vector3( -1, 0, 0 ), Vector3( -1, 0, 0 ), Vector3( -1, 0, 0 ), Vector3( -1, 0, 0 ) ]
-
-[node name="Spatial" parent="Enemy" instance=ExtResource( 6 )]
 
 [node name="Goal" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0 )
