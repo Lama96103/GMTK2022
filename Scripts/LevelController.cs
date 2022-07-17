@@ -219,13 +219,19 @@ public class LevelController : Spatial
                     {
                         if(item.Value.Effect.EffectsPlayer)
                         {
-                            item.Value.Effect.ApplyEffect(dice);
+                            if(item.Value.Effect.ApplyEffect(dice))
+                            {
+                                RemoveEffect(item.Key);
+                            }
                             return true;
                         }
                     }
                     else
                     {
-                        item.Value.Effect.ApplyEffect(dice);
+                        if(item.Value.Effect.ApplyEffect(dice))
+                        {
+                            RemoveEffect(item.Key);
+                        }
                         return true;
                     }
                         

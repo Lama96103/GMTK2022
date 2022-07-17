@@ -10,7 +10,7 @@ public interface IGridEffect
     string DiceMaterialPath {get;}
     bool EffectsPlayer {get;}
     Vector3[] Locations {get;}
-    void ApplyEffect(DiceController dice);
+    bool ApplyEffect(DiceController dice);
     
 }
 
@@ -26,7 +26,7 @@ public class FireEffect : IGridEffect
 
     public bool EffectsPlayer => true;
 
-    public void ApplyEffect(DiceController dice)
+    public bool ApplyEffect(DiceController dice)
     {
         if(dice.IsInGroup("EnemyDice"))
         {
@@ -38,6 +38,7 @@ public class FireEffect : IGridEffect
             ((PlayerDiceController)dice).SetDead();
             WorldController.Instance.LoadDeathMenu();
         }
+        return false;
     }
 }
 
@@ -61,13 +62,14 @@ public class IceEffect : IGridEffect
         this.effectDirection = effectDirection;
     }
 
-    public void ApplyEffect(DiceController dice)
+    public bool ApplyEffect(DiceController dice)
     {
         if(dice.IsInGroup("EnemyDice"))
         {
             EnemyDiceController enemyDice = (EnemyDiceController) dice;
             enemyDice.setFrozen();
         }
+        return false;
     }
 }
 
@@ -85,7 +87,7 @@ public class MineEffect : IGridEffect
 
     public Vector3[] Locations => new Vector3[]{Vector3.Zero};
 
-    public void ApplyEffect(DiceController dice)
+    public bool ApplyEffect(DiceController dice)
     {
         AudioStreamSample audioStream = ResourceLoader.Load<AudioStreamSample>("res://Sounds and Music/Sounds/mixkit-explosion-hit.wav");
         dice.soundEffectSteamPlayer.Stream = audioStream;
@@ -100,5 +102,6 @@ public class MineEffect : IGridEffect
             ((PlayerDiceController)dice).SetDead();
             WorldController.Instance.LoadDeathMenu();
         }
+        return true;
     }
 }

@@ -4,7 +4,7 @@ using System;
 public class WorldController : Spatial
 {
     public static WorldController Instance {get;private set;}
-    public static string CurrentLevelPath = "res://Nodes/Level/Level_002.tscn";
+    public static string CurrentLevelPath = "res://Nodes/Level/Level_008.tscn";
 
 
     private LevelController currentLevel;
