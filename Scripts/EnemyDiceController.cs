@@ -15,7 +15,7 @@ public class EnemyDiceController : DiceController
 
     private Array<MeshInstance> iceMeshes = new Array<MeshInstance>();
 
-    private bool IsDead = false;
+    public bool IsDead = false;
     private float deadTimer = 3;
 
     public override void _Ready()

@@ -66,6 +66,7 @@ public class WorldController : Spatial
             this.RemoveChild(currentLevel);
             currentLevel.QueueFree();
         }
+        GetNode<CameraController>("CameraController").LevelReset();
         CurrentLevelPath = path;
 
         PackedScene scene = (PackedScene)ResourceLoader.Load(path);
