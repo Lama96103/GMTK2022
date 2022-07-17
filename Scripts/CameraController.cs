@@ -60,6 +60,13 @@ public class CameraController : Spatial
 
     }
 
+    public void LevelReset()
+    {
+        navigationCompass.RectRotation = 0;
+        navigationCompassHint.Texture = navigationCompassHintTextures[0];
+        this.RotationDegrees = new Vector3(0,45,0);
+    }
+
     public void RotateCamera(float dir)
     {
         if(isRotating) return;

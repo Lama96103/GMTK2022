@@ -20,7 +20,8 @@ public class GameOver : Spatial
         {
             if(dice.GetChild<Spatial>(0).GlobalTransform.origin.Equals(this.GlobalTransform.origin))
             {
-                WorldController.Instance.LoadDeathMenu();
+
+                if(!((EnemyDiceController)dice).IsDead) WorldController.Instance.LoadDeathMenu();
             }
         }
     }

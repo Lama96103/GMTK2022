@@ -331,6 +331,21 @@ transform = Transform( 0.921236, -0.167683, 0.351007, -0.110873, 0.751715, 0.650
 light_energy = 0.9
 shadow_enabled = true
 
+[node name="Label" type="Label" parent="."]
+margin_left = 10.0
+margin_top = 120.0
+margin_right = 437.0
+margin_bottom = 233.0
+rect_rotation = -19.8
+rect_scale = Vector2( 0.8, 0.8 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 3 )
+text = "Controls:
+WASD - Move the dice
+QE - Rotate the Camera
+ESC - Open Menu"
+align = 1
+
 [connection signal="pressed" from="Control/MainMenu/MarginContainer2/CenterContainer/Button" to="Control" method="ButtonStartGamePressed"]
 [connection signal="pressed" from="Control/MainMenu/MarginContainer5/CenterContainer/Button" to="Control" method="ToggleSettings" binds= [ "Levels" ]]
 [connection signal="pressed" from="Control/MainMenu/MarginContainer3/CenterContainer/Button" to="Control" method="ToggleSettings" binds= [ "Settings" ]]
