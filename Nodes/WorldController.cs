@@ -97,6 +97,7 @@ public class WorldController : Spatial
     public void LoadDeathMenu()
     {
         failureLevelScreen.Visible = true;
+        currentLevel.RemoveLabels();
     }
 
 }

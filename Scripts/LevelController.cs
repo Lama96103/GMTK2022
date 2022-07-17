@@ -111,11 +111,16 @@ public class LevelController : Spatial
         if(executionOrder.Count == 1)
         {
             WorldController.Instance.OnFinishedLevel();
-            foreach(Spatial child in GetChildren())
-            {
-                Label3D label = child as Label3D;
-                if(label != null) label.Visible = false;
-            }
+            RemoveLabels();
+        }
+    }
+
+    public void RemoveLabels()
+    {
+        foreach(Spatial child in GetChildren())
+        {
+            Label3D label = child as Label3D;
+            if(label != null) label.Visible = false;
         }
     }
 
@@ -133,6 +138,9 @@ public class LevelController : Spatial
             {   
                 if(gridStatus[affectedPos].Effect.GetType() == typeof(MineEffect))
                 {
+                    // Still apply effects of other mines
+                    if(gridStatus[affectedPos].Dice != null && gridStatus[affectedPos].Dice != dice)
+                        gridStatus[affectedPos].Effect.ApplyEffect(gridStatus[affectedPos].Dice);
                     continue;
                 }
                 RemoveEffect(affectedPos);
