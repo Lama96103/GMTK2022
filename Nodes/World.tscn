@@ -57,8 +57,7 @@ shape = SubResource( 1 )
 stream = ExtResource( 5 )
 volume_db = -15.0
 autoplay = true
-
-[node name="AudioStreamPlayerSounds" type="AudioStreamPlayer" parent="."]
+bus = "Music"
 
 [node name="Game_UI" type="Control" parent="."]
 anchor_right = 1.0
@@ -87,3 +86,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 4 )
 expand = true
+
+[node name="Status" type="Control" parent="Game_UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
