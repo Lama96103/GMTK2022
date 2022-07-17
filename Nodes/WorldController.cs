@@ -30,6 +30,12 @@ public class WorldController : Spatial
         this.AddChild(currentLevel);
     }
 
+
+    public void LoadNextLevel()
+    {
+        LoadLevel(currentLevel.NextLevel);
+    }
+
     public void LoadMainMenu()
     {
         this.GetTree().ChangeScene("res://Nodes/Menu/MainMenu.tscn");

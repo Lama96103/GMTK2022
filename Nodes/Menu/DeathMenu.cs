@@ -10,6 +10,6 @@ public class DeathMenu : Control
 
     public void ButtonMainMenuPressed()
     {
-        this.GetTree().ChangeScene("res://Nodes/World.tscn");
+        this.GetTree().ChangeScene("res://Nodes/Menu/MainMenu.tscn");
     }
 }

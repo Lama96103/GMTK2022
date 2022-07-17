@@ -16,11 +16,13 @@ public abstract class DiceController : Spatial
     public bool IsRolling = false;
 
     public Vector3 currentDirection;
+    private AudioStreamPlayer soundEffectSteamPlayer;
 
     public override void _Ready()
     {
        dice = GetChild<Spatial>(0);
        dice.Connect("DiceRolled", this, "OnDiceRolled");
+       
        SpawnDiceSides();
     }
 
@@ -100,7 +102,6 @@ public abstract class DiceController : Spatial
         {
             if(item.Value.IsColliding())
             {
-                GD.Print("Fired " , this.Name);
                 int index = EffectLocation.IndexOf(item.Key);
                 IGridEffect effect = GetEffect(EffectType[index], currentDirection);
                 CurrentLevel.AddEffect(effect, dice.GlobalTransform.origin, this);
@@ -123,7 +124,7 @@ public abstract class DiceController : Spatial
     private void PlaySound(IGridEffect effect)
     {
         String path = "res://Sounds and Music/Sounds/";
-        AudioStreamPlayer audioPlayer = CurrentLevel.GetParent().GetNode<AudioStreamPlayer>("AudioStreamPlayerSounds");
+        if(soundEffectSteamPlayer == null) soundEffectSteamPlayer = CurrentLevel?.GetParent().GetNode<AudioStreamPlayer>("AudioStreamPlayerSounds");
         if(effect == null)
         {
             String[] diceSounds = new String[4];
@@ -134,13 +135,13 @@ public abstract class DiceController : Spatial
             Random random = new Random();
             int selection = random.Next(0, diceSounds.Length);
             AudioStreamSample audioStream = ResourceLoader.Load<AudioStreamSample>(path + diceSounds[selection]);
-            audioPlayer.Stream = audioStream;
-            audioPlayer.Play();
+            soundEffectSteamPlayer.Stream = audioStream;
+            soundEffectSteamPlayer.Play();
         }else
         {
             AudioStreamSample audioStream = ResourceLoader.Load<AudioStreamSample>(effect.ParticleSoundPath);
-            audioPlayer.Stream = audioStream;
-            audioPlayer.Play();
+            soundEffectSteamPlayer.Stream = audioStream;
+            soundEffectSteamPlayer.Play();
         }
     }
 

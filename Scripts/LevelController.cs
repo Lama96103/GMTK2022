@@ -8,7 +8,7 @@ public class LevelController : Spatial
 {
     [Export] private float SizeX = 15.5f;
     [Export] private float SizeZ = 15.5f;
-    [Export] private string NextLevel = "";
+    [Export] public string NextLevel = "";
 
     private System.Collections.Generic.Dictionary<Vector3, GridState> gridStatus = new System.Collections.Generic.Dictionary<Vector3, GridState>();
 
@@ -148,6 +148,11 @@ public class LevelController : Spatial
         if(currentDice >= executionOrder.Count || executionOrder[currentDice] == null)
         {
             ProgressRound();
+        }
+
+        if(executionOrder.Count == 1)
+        {
+            WorldController.Instance.LoadNextLevel();
         }
     }
 
