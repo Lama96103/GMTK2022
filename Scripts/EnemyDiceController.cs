@@ -49,7 +49,6 @@ public class EnemyDiceController : DiceController
             {
                 lastPathDirection = !lastPathDirection;
                 FillPath(lastPathDirection);
-                GD.Print(currentPath);
             }
         }
     }

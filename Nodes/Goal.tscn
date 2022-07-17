@@ -12,7 +12,7 @@ emission_on_uv2 = false
 
 [sub_resource type="CubeMesh" id=2]
 material = SubResource( 1 )
-size = Vector3( 1, 1, 1 )
+size = Vector3( 0.9, 0.9, 0.9 )
 
 [node name="Spatial" type="Spatial"]
 script = ExtResource( 1 )

@@ -8,6 +8,7 @@ public interface IGridEffect
     string ParticleEffectPath {get;}
     string ParticleSoundPath {get;}
     string DiceMaterialPath {get;}
+    bool EffectsPlayer {get;}
     Vector3[] Locations {get;}
     void ApplyEffect(DiceController dice);
     
@@ -22,6 +23,8 @@ public class FireEffect : IGridEffect
     public string ParticleSoundPath => "res://Sounds and Music/Sounds/mixkit-fire-swoosh-burning-2s.wav";
 
     public string DiceMaterialPath => "res://Materials/Dice_FireEffect.tres";
+
+    public bool EffectsPlayer => true;
 
     public void ApplyEffect(DiceController dice)
     {
@@ -49,6 +52,8 @@ public class IceEffect : IGridEffect
     public string DiceMaterialPath => "res://Materials/Dice_IceEffect.tres";
     
     public Vector3[] Locations => new Vector3[]{effectDirection, effectDirection * 2, effectDirection * 3};
+
+    public bool EffectsPlayer => false;
 
     public IceEffect(Vector3 effectDirection)
     {
