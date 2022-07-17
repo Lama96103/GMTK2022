@@ -17,7 +17,7 @@ public abstract class DiceController : Spatial
     public bool IsRolling = false;
 
     public Vector3 currentDirection;
-    private AudioStreamPlayer soundEffectSteamPlayer;
+    private AudioStreamPlayer3D soundEffectSteamPlayer;
 
     public override void _Ready()
     {
@@ -27,6 +27,12 @@ public abstract class DiceController : Spatial
        SpatialMaterial spatialMat = new SpatialMaterial();
        spatialMat.AlbedoColor = diceColor;
        mi.MaterialOverride = spatialMat;
+
+       soundEffectSteamPlayer = new AudioStreamPlayer3D();
+       this.AddChild(soundEffectSteamPlayer);
+       soundEffectSteamPlayer.UnitSize = 10;
+       soundEffectSteamPlayer.Bus = "SoundEffects";
+       
        SpawnDiceSides();
     }
 
@@ -100,19 +106,21 @@ public abstract class DiceController : Spatial
 
     private void OnDiceRolled()
     {
-        CurrentLevel.UpdateDiceLocation(this, dice.GlobalTransform.origin);
+        bool gotEffect = CurrentLevel.UpdateDiceLocation(this, dice.GlobalTransform.origin);
 
-        foreach(var item in RayCasts)
+        if(!gotEffect)
         {
-            if(item.Value.IsColliding())
+            foreach(var item in RayCasts)
             {
-                int index = EffectLocation.IndexOf(item.Key);
-                IGridEffect effect = GetEffect(EffectType[index], currentDirection);
-                CurrentLevel.AddEffect(effect, dice.GlobalTransform.origin, this);
-                PlaySound(effect);
+                if(item.Value.IsColliding())
+                {
+                    int index = EffectLocation.IndexOf(item.Key);
+                    IGridEffect effect = GetEffect(EffectType[index], currentDirection);
+                    CurrentLevel.AddEffect(effect, dice.GlobalTransform.origin, this);
+                    PlaySound(effect);
+                }
             }
         }
-
         AfterDiceRolled();
         IsRolling = false;
     }
@@ -128,7 +136,6 @@ public abstract class DiceController : Spatial
     private void PlaySound(IGridEffect effect)
     {
         String path = "res://Sounds and Music/Sounds/";
-        if(soundEffectSteamPlayer == null) soundEffectSteamPlayer = CurrentLevel?.GetParent().GetNode<AudioStreamPlayer>("AudioStreamPlayerSounds");
         if(effect == null)
         {
             String[] diceSounds = new String[4];
