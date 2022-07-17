@@ -47,7 +47,7 @@ public class IceEffect : IGridEffect
 
     public string ParticleSoundPath => "res://Sounds and Music/Sounds/Freeze.wav";
     public string DiceMaterialPath => "res://Materials/Dice_IceEffect.tres";
-
+    
     public Vector3[] Locations => new Vector3[]{effectDirection, effectDirection * 2, effectDirection * 3};
 
     public IceEffect(Vector3 effectDirection)

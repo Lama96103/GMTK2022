@@ -23,6 +23,9 @@ albedo_color = Color( 0.403922, 0.403922, 0.403922, 1 )
 
 [node name="Level_001" type="Spatial"]
 script = ExtResource( 2 )
+SizeX = 10.5
+SizeZ = 10.5
+NextLevel = "res://Nodes/Level/Level_004.tscn"
 GridMesh = ExtResource( 4 )
 
 [node name="GridMesh" type="MultiMeshInstance" parent="."]
