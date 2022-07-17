@@ -41,21 +41,26 @@ EffectType = [ "Fire", "Fire" ]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 7 )
 EffectLocation = [ Vector3( 0, -1, 0 ), Vector3( 0, 1, 0 ) ]
 EffectType = [ "FireEffect", "Fire" ]
-path = [ Vector3( 0, 0, -1 ), Vector3( -1, 0, 0 ), Vector3( 0, 0, -1 ), Vector3( 0, 0, -1 ), Vector3( 0, 0, -1 ), Vector3( 1, 0, 0 ), Vector3( 0, 0, -1 ), Vector3( 0, 0, -1 ) ]
-Patrol = true
+path = [ Vector3( 0, 0, -1 ), Vector3( -1, 0, 0 ), Vector3( 0, 0, -1 ), Vector3( 0, 0, -1 ), Vector3( 0, 0, -1 ), Vector3( 1, 0, 0 ), Vector3( 0, 0, -1 ), Vector3( 0, 0, -1 ), Vector3( 0, 0, -1 ), Vector3( -1, 0, 0 ), Vector3( -1, 0, 0 ) ]
 
 [node name="Enemy2" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 7 )
 EffectLocation = [ Vector3( 0, -1, 0 ), Vector3( 0, 1, 0 ) ]
 EffectType = [ "FireEffect", "Fire" ]
-path = [ Vector3( 0, 0, -1 ), Vector3( 1, 0, 0 ), Vector3( 0, 0, -1 ), Vector3( 0, 0, -1 ), Vector3( 0, 0, -1 ), Vector3( -1, 0, 0 ), Vector3( 0, 0, -1 ), Vector3( 0, 0, -1 ) ]
-Patrol = true
+path = [ Vector3( 0, 0, -1 ), Vector3( 1, 0, 0 ), Vector3( 0, 0, -1 ), Vector3( 0, 0, -1 ), Vector3( 0, 0, -1 ), Vector3( -1, 0, 0 ), Vector3( 0, 0, -1 ), Vector3( 0, 0, -1 ), Vector3( 0, 0, -1 ), Vector3( 1, 0, 0 ), Vector3( 1, 0, 0 ) ]
 
 [node name="Enemy3" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 11 )
-EffectLocation = [ Vector3( 1, 0, 0 ), Vector3( 0, 1, 0 ), Vector3( 0, 0, 1 ), Vector3( -1, 0, 0 ), Vector3( 0, -1, 0 ), Vector3( 0, 0, -1 ) ]
-EffectType = [ "Fire", "Fire", "Fire", "Fire", "Fire", "Fire" ]
-path = [ Vector3( 0, 0, -1 ), Vector3( 0, 0, -1 ), Vector3( 0, 0, -1 ), Vector3( 0, 0, -1 ), Vector3( 0, 0, -1 ), Vector3( 0, 0, -1 ) ]
+EffectLocation = [ Vector3( 1, 0, 0 ), Vector3( 0, 0, 1 ), Vector3( -1, 0, 0 ), Vector3( 0, -1, 0 ), Vector3( 0, 0, -1 ) ]
+EffectType = [ "Fire", "Fire", "Fire", "Fire", "Fire" ]
+path = [ Vector3( 0, 0, -1 ), Vector3( 0, 0, -1 ), Vector3( 0, 0, -1 ), Vector3( 0, 0, -1 ), Vector3( 0, 0, -1 ), Vector3( 0, 0, -1 ), Vector3( 0, 0, -1 ), Vector3( 0, 0, -1 ) ]
+Patrol = true
+
+[node name="Enemy4" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 11 )
+EffectLocation = [ Vector3( 1, 0, 0 ), Vector3( 0, 0, 1 ), Vector3( -1, 0, 0 ), Vector3( 0, -1, 0 ), Vector3( 0, 0, -1 ) ]
+EffectType = [ "Fire", "Fire", "Fire", "Fire", "Fire" ]
+path = [ Vector3( 0, 0, -1 ), Vector3( 0, 0, -1 ), Vector3( 0, 0, -1 ), Vector3( 0, 0, -1 ), Vector3( 0, 0, -1 ), Vector3( 0, 0, -1 ), Vector3( 0, 0, -1 ), Vector3( 0, 0, -1 ) ]
 Patrol = true
 
 [node name="Goal" parent="." instance=ExtResource( 3 )]
