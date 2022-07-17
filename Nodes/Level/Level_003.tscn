@@ -57,4 +57,3 @@ EffectType = [ "FireEffect", "FireEffect", "FireEffect", "FireEffect", "FireEffe
 path = [ Vector3( 0, 0, 1 ), Vector3( 0, 0, 1 ), Vector3( 0, 0, 1 ), Vector3( 0, 0, 1 ) ]
 
 [node name="Goal" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0 )

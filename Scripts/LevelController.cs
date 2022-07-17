@@ -63,7 +63,12 @@ public class LevelController : Spatial
             WorldController.Instance.SetCurrentRound(false);
         }
         else 
+        {
+            RemoveLabels();
             WorldController.Instance.SetCurrentRound(true);
+        }
+
+
 
 
         startedRolling = false;
