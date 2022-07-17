@@ -11,7 +11,7 @@ public abstract class DiceController : Spatial
 
     private Godot.Collections.Dictionary<Vector3, RayCast> RayCasts = new Godot.Collections.Dictionary<Vector3, RayCast>();
 
-    private Spatial dice;
+    protected Spatial dice;
     private RayCast rayCast;
 
     public bool IsRolling = false;

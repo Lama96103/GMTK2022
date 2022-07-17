@@ -39,7 +39,7 @@ public class LevelController : Spatial
         
         if(!startedRolling)
         {
-            if(executionOrder[currentDice].ExecuteTurn())
+            if(executionOrder.Count > 1 && executionOrder[currentDice].ExecuteTurn())
             {
                 alreadyExecutedDice.Add(executionOrder[currentDice]);
                 startedRolling = true;
@@ -65,7 +65,8 @@ public class LevelController : Spatial
         enemyCountDown = 0.5f;
         if(currentDice == 0 || currentDice == 1)
         {
-            CalulcateEffectsDuration();
+            if(executionOrder.Count > 1)
+                CalulcateEffectsDuration();
         }
 
         if(alreadyExecutedDice.Contains(executionOrder[currentDice])) ProgressRound();
@@ -127,7 +128,7 @@ public class LevelController : Spatial
             gridStatus[affectedPos].EffectDuration = effect.Duration;
             gridStatus[affectedPos].IsPlayerEffect = dice == executionOrder[0];
 
-            if(gridStatus[affectedPos].Dice != null)
+            if(gridStatus[affectedPos].Dice != null && gridStatus[affectedPos].Dice != dice)
                 gridStatus[affectedPos].Effect.ApplyEffect(gridStatus[affectedPos].Dice);
 
             Spatial particleEffectObject = particleEffect.Instance<Spatial>();

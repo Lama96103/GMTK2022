@@ -30,7 +30,7 @@ public class FireEffect : IGridEffect
     {
         if(dice.IsInGroup("EnemyDice"))
         {
-            dice.QueueFree();
+            ((EnemyDiceController)dice).SetDead();
             dice.CurrentLevel.RemoveDice(dice);
         }
         else

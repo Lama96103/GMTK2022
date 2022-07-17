@@ -15,11 +15,29 @@ public class EnemyDiceController : DiceController
 
     private Array<MeshInstance> iceMeshes = new Array<MeshInstance>();
 
+    private bool IsDead = false;
+    private float deadTimer = 3;
+
     public override void _Ready()
     {
         base._Ready();
         FillPath(false);
         ShowNextSteps();
+    }
+
+    public override void _Process(float delta)
+    {
+        base._Process(delta);
+
+        if(IsDead)
+        {
+            deadTimer -= delta;
+            if(deadTimer < 0)
+            {
+                this.GetParent().RemoveChild(this);
+                this.QueueFree();
+            }
+        }
     }
 
     private void FillPath(bool reverse)
@@ -29,8 +47,18 @@ public class EnemyDiceController : DiceController
         else foreach(Vector3 pos in path) currentPath.Add(pos);
     }
 
+    public void SetDead()
+    {
+        IsDead = true;
+        PackedScene particleScene = (PackedScene)ResourceLoader.Load("res://Particles/BurningEffect.tscn");
+        Spatial particle = particleScene.Instance<Spatial>();
+        particle.Translate(dice.Translation);
+        this.AddChild(particle);
+    }
+
     public void Move()
     {
+        if(IsDead) return;
         if(currentPath.Count > 0)
         {
             if(!(currentPath[0].Equals(Vector3.Zero)))
@@ -55,6 +83,7 @@ public class EnemyDiceController : DiceController
 
     public void setFrozen()
     {
+        if(IsDead) return;
         currentPath.Insert(0, Vector3.Zero);
         currentPath.Insert(0, Vector3.Zero);
         currentPath.Insert(0, Vector3.Zero);
@@ -104,6 +133,7 @@ public class EnemyDiceController : DiceController
 
     private void ShowNextSteps()
     {
+        if(IsDead) return;
         int pathMarkerCount = 0;
         foreach(Node node in this.GetChildren())
         {
@@ -123,11 +153,13 @@ public class EnemyDiceController : DiceController
 
     protected override void AfterDiceRolled()
     {
+        if(IsDead) return;
         ShowNextSteps();
     }
 
     public override bool ExecuteTurn()
     {
+        if(IsDead) return true;
         if(IsRolling) return false;
         Move();
         return true;
