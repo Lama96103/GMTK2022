@@ -16,12 +16,21 @@
 [sub_resource type="Environment" id=2]
 background_mode = 2
 background_sky = SubResource( 3 )
+fog_depth_end = 80.2
 ssao_enabled = true
 dof_blur_far_enabled = true
 dof_blur_far_distance = 13.95
 dof_blur_near_enabled = true
 dof_blur_near_distance = 10.08
 glow_enabled = true
+glow_levels/1 = true
+glow_levels/2 = true
+glow_levels/4 = true
+glow_intensity = 1.5
+adjustment_enabled = true
+adjustment_brightness = 1.05
+adjustment_contrast = 1.1
+adjustment_saturation = 1.1
 
 [sub_resource type="BoxShape" id=1]
 
@@ -91,6 +100,7 @@ texture = ExtResource( 4 )
 expand = true
 
 [node name="Status" type="Control" parent="Game_UI"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -120,5 +130,28 @@ grow_vertical = 0
 rect_min_size = Vector2( 0, 40 )
 text = "Next Level"
 icon_align = 1
+
+[node name="TurnIndicator" type="Control" parent="Game_UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Label" type="Label" parent="Game_UI/TurnIndicator"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_top = 13.0
+grow_horizontal = 2
+rect_min_size = Vector2( 600, 80 )
+rect_pivot_offset = Vector2( 300, 0 )
+custom_colors/font_color = Color( 0.796078, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 2
+text = "Enemy Round"
+align = 1
+valign = 2
+
+[node name="Panel" type="Panel" parent="Game_UI/TurnIndicator/Label"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
 
 [connection signal="pressed" from="Game_UI/Status/Button" to="." method="LoadNextLevel"]

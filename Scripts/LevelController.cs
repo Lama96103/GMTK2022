@@ -58,7 +58,12 @@ public class LevelController : Spatial
     {
         currentDice = (currentDice + 1) % executionOrder.Count;
         if(currentDice == 0)
+        {
             alreadyExecutedDice.Clear();
+            WorldController.Instance.SetCurrentRound(false);
+        }
+        else 
+            WorldController.Instance.SetCurrentRound(true);
 
 
         startedRolling = false;
