@@ -1,38 +1,62 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Nodes/Menu/MainMenu.cs" type="Script" id=1]
 [ext_resource path="res://UI_Theme.tres" type="Theme" id=2]
 [ext_resource path="res://fonts/kirifont/KirifontSmall.tres" type="DynamicFont" id=3]
+[ext_resource path="res://Nodes/Level/Level_MainScreen.tscn" type="PackedScene" id=4]
 
-[node name="Control" type="Control"]
+[sub_resource type="ProceduralSky" id=3]
+
+[sub_resource type="Environment" id=4]
+background_mode = 2
+background_sky = SubResource( 3 )
+fog_depth_end = 80.2
+ssao_enabled = true
+dof_blur_far_enabled = true
+dof_blur_far_distance = 13.95
+dof_blur_near_enabled = true
+dof_blur_near_distance = 10.08
+glow_enabled = true
+glow_levels/1 = true
+glow_levels/2 = true
+glow_levels/4 = true
+glow_intensity = 1.5
+adjustment_enabled = true
+adjustment_brightness = 1.05
+adjustment_contrast = 1.1
+adjustment_saturation = 1.1
+
+[node name="Node" type="Node"]
+
+[node name="Control" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
 theme = ExtResource( 2 )
 script = ExtResource( 1 )
 
-[node name="MainMenu" type="VBoxContainer" parent="."]
+[node name="MainMenu" type="VBoxContainer" parent="Control"]
 margin_right = 1024.0
 margin_bottom = 384.0
 
-[node name="MarginContainer" type="MarginContainer" parent="MainMenu"]
+[node name="MarginContainer" type="MarginContainer" parent="Control/MainMenu"]
 margin_right = 1024.0
 margin_bottom = 215.0
 custom_constants/margin_top = 150
 
-[node name="Label" type="Label" parent="MainMenu/MarginContainer"]
+[node name="Label" type="Label" parent="Control/MainMenu/MarginContainer"]
 margin_top = 150.0
 margin_right = 1024.0
 margin_bottom = 215.0
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 2
 text = "Nicer Dice Game"
 align = 1
 valign = 1
 uppercase = true
 
-[node name="MarginContainer2" type="MarginContainer" parent="MainMenu"]
+[node name="MarginContainer2" type="MarginContainer" parent="Control/MainMenu"]
 margin_top = 219.0
 margin_right = 1024.0
 margin_bottom = 384.0
@@ -40,20 +64,20 @@ custom_constants/margin_right = 400
 custom_constants/margin_top = 125
 custom_constants/margin_left = 400
 
-[node name="CenterContainer" type="AspectRatioContainer" parent="MainMenu/MarginContainer2"]
+[node name="CenterContainer" type="AspectRatioContainer" parent="Control/MainMenu/MarginContainer2"]
 margin_left = 400.0
 margin_top = 125.0
 margin_right = 624.0
 margin_bottom = 165.0
 ratio = 10.0
 
-[node name="Button" type="Button" parent="MainMenu/MarginContainer2/CenterContainer"]
+[node name="Button" type="Button" parent="Control/MainMenu/MarginContainer2/CenterContainer"]
 margin_right = 224.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 0, 40 )
 text = "Play"
 
-[node name="MarginContainer3" type="MarginContainer" parent="MainMenu"]
+[node name="MarginContainer3" type="MarginContainer" parent="Control/MainMenu"]
 margin_top = 388.0
 margin_right = 1024.0
 margin_bottom = 438.0
@@ -61,20 +85,20 @@ custom_constants/margin_right = 400
 custom_constants/margin_top = 10
 custom_constants/margin_left = 400
 
-[node name="CenterContainer" type="AspectRatioContainer" parent="MainMenu/MarginContainer3"]
+[node name="CenterContainer" type="AspectRatioContainer" parent="Control/MainMenu/MarginContainer3"]
 margin_left = 400.0
 margin_top = 10.0
 margin_right = 624.0
 margin_bottom = 50.0
 ratio = 10.0
 
-[node name="Button" type="Button" parent="MainMenu/MarginContainer3/CenterContainer"]
+[node name="Button" type="Button" parent="Control/MainMenu/MarginContainer3/CenterContainer"]
 margin_right = 224.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 0, 40 )
 text = "Settings"
 
-[node name="MarginContainer4" type="MarginContainer" parent="MainMenu"]
+[node name="MarginContainer4" type="MarginContainer" parent="Control/MainMenu"]
 margin_top = 442.0
 margin_right = 1024.0
 margin_bottom = 492.0
@@ -82,58 +106,59 @@ custom_constants/margin_right = 400
 custom_constants/margin_top = 10
 custom_constants/margin_left = 400
 
-[node name="CenterContainer" type="AspectRatioContainer" parent="MainMenu/MarginContainer4"]
+[node name="CenterContainer" type="AspectRatioContainer" parent="Control/MainMenu/MarginContainer4"]
 margin_left = 400.0
 margin_top = 10.0
 margin_right = 624.0
 margin_bottom = 50.0
 ratio = 10.0
 
-[node name="Button" type="Button" parent="MainMenu/MarginContainer4/CenterContainer"]
+[node name="Button" type="Button" parent="Control/MainMenu/MarginContainer4/CenterContainer"]
 margin_right = 224.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 0, 40 )
 text = "Exit"
 
-[node name="Settings" type="VBoxContainer" parent="."]
+[node name="Settings" type="VBoxContainer" parent="Control"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="MarginContainer" type="MarginContainer" parent="Settings"]
+[node name="MarginContainer" type="MarginContainer" parent="Control/Settings"]
 margin_right = 1024.0
 margin_bottom = 135.0
 custom_constants/margin_top = 50
 custom_constants/margin_bottom = 20
 
-[node name="Label" type="Label" parent="Settings/MarginContainer"]
+[node name="Label" type="Label" parent="Control/Settings/MarginContainer"]
 margin_top = 50.0
 margin_right = 1024.0
 margin_bottom = 115.0
 text = "Settings"
 align = 1
 
-[node name="Music" type="GridContainer" parent="Settings"]
+[node name="Music" type="GridContainer" parent="Control/Settings"]
 margin_top = 139.0
 margin_right = 1024.0
 margin_bottom = 225.0
 columns = 2
 
-[node name="Master" type="Label" parent="Settings/Music"]
+[node name="Master" type="Label" parent="Control/Settings/Music"]
 margin_right = 510.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_fonts/font = ExtResource( 3 )
 text = "Master Volume"
 align = 2
 
-[node name="Master Control" type="Control" parent="Settings/Music"]
+[node name="Master Control" type="Control" parent="Control/Settings/Music"]
 margin_left = 514.0
 margin_right = 1024.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
 
-[node name="HSlider" type="HSlider" parent="Settings/Music/Master Control"]
+[node name="HSlider" type="HSlider" parent="Control/Settings/Music/Master Control"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -255.0
@@ -144,23 +169,24 @@ min_value = -80.0
 max_value = 6.0
 value = 6.0
 
-[node name="Music" type="Label" parent="Settings/Music"]
+[node name="Music" type="Label" parent="Control/Settings/Music"]
 margin_top = 30.0
 margin_right = 510.0
 margin_bottom = 56.0
 size_flags_horizontal = 3
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_fonts/font = ExtResource( 3 )
 text = "Music Volume"
 align = 2
 
-[node name="Music Control" type="Control" parent="Settings/Music"]
+[node name="Music Control" type="Control" parent="Control/Settings/Music"]
 margin_left = 514.0
 margin_top = 30.0
 margin_right = 1024.0
 margin_bottom = 56.0
 size_flags_horizontal = 3
 
-[node name="HSlider" type="HSlider" parent="Settings/Music/Music Control"]
+[node name="HSlider" type="HSlider" parent="Control/Settings/Music/Music Control"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -255.0
@@ -171,23 +197,24 @@ min_value = -80.0
 max_value = 6.0
 value = 6.0
 
-[node name="Effect" type="Label" parent="Settings/Music"]
+[node name="Effect" type="Label" parent="Control/Settings/Music"]
 margin_top = 60.0
 margin_right = 510.0
 margin_bottom = 86.0
 size_flags_horizontal = 3
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_fonts/font = ExtResource( 3 )
 text = "Effect Volume"
 align = 2
 
-[node name="Effect Controll" type="Control" parent="Settings/Music"]
+[node name="Effect Controll" type="Control" parent="Control/Settings/Music"]
 margin_left = 514.0
 margin_top = 60.0
 margin_right = 1024.0
 margin_bottom = 86.0
 size_flags_horizontal = 3
 
-[node name="HSlider" type="HSlider" parent="Settings/Music/Effect Controll"]
+[node name="HSlider" type="HSlider" parent="Control/Settings/Music/Effect Controll"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -255.0
@@ -198,7 +225,7 @@ min_value = -80.0
 max_value = 6.0
 value = 6.0
 
-[node name="MarginContainer5" type="MarginContainer" parent="Settings"]
+[node name="MarginContainer5" type="MarginContainer" parent="Control/Settings"]
 margin_top = 229.0
 margin_right = 1024.0
 margin_bottom = 279.0
@@ -206,23 +233,40 @@ custom_constants/margin_right = 400
 custom_constants/margin_top = 10
 custom_constants/margin_left = 400
 
-[node name="CenterContainer" type="AspectRatioContainer" parent="Settings/MarginContainer5"]
+[node name="CenterContainer" type="AspectRatioContainer" parent="Control/Settings/MarginContainer5"]
 margin_left = 400.0
 margin_top = 10.0
 margin_right = 624.0
 margin_bottom = 50.0
 ratio = 10.0
 
-[node name="Button" type="Button" parent="Settings/MarginContainer5/CenterContainer"]
+[node name="Button" type="Button" parent="Control/Settings/MarginContainer5/CenterContainer"]
 margin_right = 224.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 0, 40 )
 text = "Close"
 
-[connection signal="pressed" from="MainMenu/MarginContainer2/CenterContainer/Button" to="." method="ButtonStartGamePressed"]
-[connection signal="pressed" from="MainMenu/MarginContainer3/CenterContainer/Button" to="." method="ToggleSettings"]
-[connection signal="pressed" from="MainMenu/MarginContainer4/CenterContainer/Button" to="." method="ExitGame"]
-[connection signal="value_changed" from="Settings/Music/Master Control/HSlider" to="." method="OnMasterVolumeChange"]
-[connection signal="value_changed" from="Settings/Music/Music Control/HSlider" to="." method="OnMusicVolumeChange"]
-[connection signal="value_changed" from="Settings/Music/Effect Controll/HSlider" to="." method="OnEffectVolumeChange"]
-[connection signal="pressed" from="Settings/MarginContainer5/CenterContainer/Button" to="." method="ToggleSettings"]
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 7, 9, 7 )
+projection = 1
+size = 11.926
+
+[node name="Level_004" parent="." instance=ExtResource( 4 )]
+
+[node name="Enviroment" type="Node" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Enviroment"]
+environment = SubResource( 4 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="Enviroment"]
+transform = Transform( 0.921236, -0.167683, 0.351007, -0.110873, 0.751715, 0.650102, -0.372869, -0.637814, 0.673915, 0, 0, 0 )
+light_energy = 0.9
+shadow_enabled = true
+
+[connection signal="pressed" from="Control/MainMenu/MarginContainer2/CenterContainer/Button" to="Control" method="ButtonStartGamePressed"]
+[connection signal="pressed" from="Control/MainMenu/MarginContainer3/CenterContainer/Button" to="Control" method="ToggleSettings"]
+[connection signal="pressed" from="Control/MainMenu/MarginContainer4/CenterContainer/Button" to="Control" method="ExitGame"]
+[connection signal="value_changed" from="Control/Settings/Music/Master Control/HSlider" to="Control" method="OnMasterVolumeChange"]
+[connection signal="value_changed" from="Control/Settings/Music/Music Control/HSlider" to="Control" method="OnMusicVolumeChange"]
+[connection signal="value_changed" from="Control/Settings/Music/Effect Controll/HSlider" to="Control" method="OnEffectVolumeChange"]
+[connection signal="pressed" from="Control/Settings/MarginContainer5/CenterContainer/Button" to="Control" method="ToggleSettings"]

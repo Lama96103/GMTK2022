@@ -26,4 +26,12 @@ public class PlayerDiceController : DiceController
         
         return false;
     }
+
+     public void SetDead()
+    {
+        PackedScene particleScene = (PackedScene)ResourceLoader.Load("res://Particles/BurningEffect.tscn");
+        Spatial particle = particleScene.Instance<Spatial>();
+        particle.Translate(dice.Translation);
+        this.AddChild(particle);
+    }
 }

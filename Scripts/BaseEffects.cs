@@ -35,6 +35,7 @@ public class FireEffect : IGridEffect
         }
         else
         {
+            ((PlayerDiceController)dice).SetDead();
             WorldController.Instance.LoadDeathMenu();
         }
     }
@@ -96,6 +97,7 @@ public class MineEffect : IGridEffect
         }
         else
         {
+            ((PlayerDiceController)dice).SetDead();
             WorldController.Instance.LoadDeathMenu();
         }
     }

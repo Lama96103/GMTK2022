@@ -6,3 +6,5 @@
 [resource]
 default_font = ExtResource( 1 )
 Button/fonts/font = ExtResource( 2 )
+Label/colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+Label/constants/shadow_as_outline = 1
