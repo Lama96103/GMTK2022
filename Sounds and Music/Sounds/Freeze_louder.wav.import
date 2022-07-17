@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Freeze_louder.wav-8b133e2af73af80a9e5e7d1a215794de.sample"
+
+[deps]
+
+source_file="res://Sounds and Music/Sounds/Freeze_louder.wav"
+dest_files=[ "res://.import/Freeze_louder.wav-8b133e2af73af80a9e5e7d1a215794de.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
