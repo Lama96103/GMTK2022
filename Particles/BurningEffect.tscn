@@ -1,0 +1,91 @@
+[gd_scene load_steps=17 format=2]
+
+[sub_resource type="Gradient" id=5]
+offsets = PoolRealArray( 0, 0.690544 )
+colors = PoolColorArray( 0.140625, 0, 0, 1, 1, 0.5625, 0, 1 )
+
+[sub_resource type="GradientTexture" id=6]
+gradient = SubResource( 5 )
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 0.506818 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.125 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=1]
+emission_shape = 2
+emission_box_extents = Vector3( 0.5, 0.5, 0.5 )
+direction = Vector3( 0, 1, 0 )
+spread = 30.45
+initial_velocity = 10.0
+initial_velocity_random = 0.15
+scale = 0.5
+scale_curve = SubResource( 4 )
+color = Color( 1, 0, 0, 1 )
+color_ramp = SubResource( 6 )
+color_initial_ramp = SubResource( 6 )
+
+[sub_resource type="SpatialMaterial" id=7]
+vertex_color_use_as_albedo = true
+albedo_color = Color( 1, 0.305882, 0, 1 )
+
+[sub_resource type="SphereMesh" id=2]
+material = SubResource( 7 )
+radius = 0.25
+height = 0.5
+radial_segments = 16
+rings = 8
+
+[sub_resource type="Gradient" id=15]
+offsets = PoolRealArray( 0, 0.438395, 1 )
+colors = PoolColorArray( 0, 0, 0, 1, 0.200573, 0.200573, 0.200573, 1, 0.811765, 0.811765, 0.811765, 0 )
+
+[sub_resource type="GradientTexture" id=16]
+gradient = SubResource( 15 )
+
+[sub_resource type="Curve" id=10]
+min_value = -10.0
+max_value = 50.0
+_data = [ Vector2( 0, 1.52273 ), 0.0, 0.0, 0, 0, Vector2( 1, -10 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=11]
+curve = SubResource( 10 )
+
+[sub_resource type="Curve" id=12]
+_data = [ Vector2( 0, 0.253409 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=13]
+curve = SubResource( 12 )
+
+[sub_resource type="ParticlesMaterial" id=8]
+direction = Vector3( 0, 1, 0 )
+spread = 28.64
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 5.0
+linear_accel_curve = SubResource( 11 )
+scale_curve = SubResource( 13 )
+color_ramp = SubResource( 16 )
+
+[sub_resource type="SpatialMaterial" id=14]
+flags_transparent = true
+vertex_color_use_as_albedo = true
+albedo_color = Color( 0.247059, 0.247059, 0.247059, 0.886275 )
+
+[sub_resource type="CubeMesh" id=9]
+material = SubResource( 14 )
+
+[node name="Spatial" type="Spatial"]
+
+[node name="Particles" type="Particles" parent="."]
+amount = 50
+lifetime = 0.41
+speed_scale = 0.38
+process_material = SubResource( 1 )
+draw_pass_1 = SubResource( 2 )
+
+[node name="Particles2" type="Particles" parent="."]
+amount = 6
+speed_scale = 0.5
+process_material = SubResource( 8 )
+draw_pass_1 = SubResource( 9 )
