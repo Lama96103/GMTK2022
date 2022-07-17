@@ -102,7 +102,8 @@ public class LevelController : Spatial
             if(item.Value.Dice == dice) item.Value.Dice = null;
         }
 
-        currentDice--;
+        if(alreadyExecutedDice.Contains(dice)) currentDice -= 1;
+
         if(currentDice >= executionOrder.Count || executionOrder[currentDice] == null)
         {
             ProgressRound();
