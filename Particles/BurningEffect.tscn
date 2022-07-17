@@ -78,7 +78,7 @@ material = SubResource( 14 )
 [node name="Spatial" type="Spatial"]
 
 [node name="Particles" type="Particles" parent="."]
-amount = 50
+amount = 30
 lifetime = 0.41
 speed_scale = 0.38
 process_material = SubResource( 1 )
