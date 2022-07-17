@@ -121,6 +121,10 @@ public class LevelController : Spatial
 
             if(gridStatus[affectedPos].Effect != null)
             {   
+                if(gridStatus[affectedPos].Effect.GetType() == typeof(MineEffect))
+                {
+                    continue;
+                }
                 RemoveEffect(affectedPos);
             }
 
