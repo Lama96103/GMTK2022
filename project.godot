@@ -15,9 +15,9 @@ run/main_scene="res://Nodes/Menu/MainMenu.tscn"
 boot_splash/show_image=false
 config/icon="res://icon.png"
 
-[display]
+[debug]
 
-window/size/fullscreen=true
+settings/stdout/print_fps=true
 
 [gui]
 

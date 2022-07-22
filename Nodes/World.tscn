@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Textures/NavigationCompass.png" type="Texture" id=1]
-[ext_resource path="res://Nodes/WorldController.cs" type="Script" id=2]
+[ext_resource path="res://Scripts/WorldController.cs" type="Script" id=2]
 [ext_resource path="res://Scripts/CameraController.cs" type="Script" id=3]
 [ext_resource path="res://Textures/NavigationCompass_First.png" type="Texture" id=4]
 [ext_resource path="res://Sounds and Music/Music/Opium.mp3" type="AudioStream" id=5]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Textures/NavigationCompass_Fourth.png" type="Texture" id=8]
 [ext_resource path="res://UI_Theme.tres" type="Theme" id=9]
 [ext_resource path="res://fonts/kirifont/KirifontLarge.tres" type="DynamicFont" id=10]
+
 
 [sub_resource type="ProceduralSky" id=3]
 
